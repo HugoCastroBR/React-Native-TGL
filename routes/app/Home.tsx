@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import FontText from '../../containers/FontText/FontText';
+import FontText from '../../components/FontText/FontText';
+
 
 
 

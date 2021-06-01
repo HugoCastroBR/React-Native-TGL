@@ -2,13 +2,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import FontText from './containers/FontText/FontText';
+import FontText from './components/FontText/FontText';
 import StackManager from './routes/navigation/Stack';
+import { Provider as PaperProvider } from 'react-native-paper';
 
 export default function App() {
   return (
     <NavigationContainer>
-      <StackManager/>
+      <PaperProvider>
+        <StackManager/>
+      </PaperProvider>
     </NavigationContainer>
   );
 }
