@@ -7,14 +7,14 @@ import { useNavigation } from '@react-navigation/native';
 
 const LogoutIcon = () => {
 
-    const navitgation = useNavigation()
+    const navigation = useNavigation()
 
     return (
-        <View style={{width:30, height:30}} >
+        <View style={{width:26, height:26}} >
             <Svg id="Capa_1" x="0px" y="0px"
-                viewBox="0 0 512 512" fill="white" width="100%" height="100%"
+                viewBox="0 0 512 512" fill="#C1C1C1" width="100%" height="100%"
                 onPress={() => {
-                    navitgation.navigate('Auth')
+                    navigation.navigate('Auth')
                 }}
                 >
                 <G>

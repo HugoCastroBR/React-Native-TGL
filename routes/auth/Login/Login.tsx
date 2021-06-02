@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
+import Page from '../../../components/Page';
 
 
 
@@ -10,14 +11,14 @@ const Login = () => {
     const navitgation = useNavigation()
 
     return (
-        <View>
+        <Page>
             <Text>
                 Login
             </Text>
             <Button style={{marginTop: 100}} onPress={() => {
-                navitgation.navigate('Home')
+                navitgation.navigate('App')
             }}>Login</Button>
-        </View>
+        </Page>
     );
 }
 

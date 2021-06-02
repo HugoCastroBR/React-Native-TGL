@@ -4,10 +4,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { Text, View } from 'react-native';
 import FontText from '../../../components/FontText/FontText';
-import Home from '../../app/Home';
-import NewBetManager from '../../app/NewBet/';
-import Login from '../../auth/Login';
-import Account from './../../app/Account';
+import Home from '../../app/Home/Home';
+import NewBetManager from '../../app/NewBet';
+import Account from '../../app/Account/Account';
+import { color } from 'react-native-reanimated';
 
 
 const Tab = createBottomTabNavigator();
@@ -22,9 +22,9 @@ const TabManager = () => {
         >
             <Tab.Screen name="Home" component={Home} options={{
 
-                tabBarIcon: ({ focused }) => (
+                tabBarIcon: ({ focused }:{focused: boolean}) => (
                     <View>
-                        <FontText>
+                        <FontText {...focused && {color:"green"}} >
                             Home
                         </FontText>
                     </View>
@@ -33,9 +33,9 @@ const TabManager = () => {
             />
             <Tab.Screen name="NewBet" component={NewBetManager} options={{
 
-                tabBarIcon: ({ focused }) => (
+                tabBarIcon: ({ focused }:{focused: boolean}) => (
                     <View>
-                        <FontText>
+                        <FontText {...focused && {color:"green"}} >
                             NewBet
                         </FontText>
                     </View>
@@ -44,9 +44,9 @@ const TabManager = () => {
 
             <Tab.Screen name="Account" component={Account} options={{
 
-            tabBarIcon: ({ focused }) => (
+            tabBarIcon: ({ focused }:{focused: boolean}) => (
                 <View>
-                    <FontText>  
+                    <FontText {...focused && {color:"green"}} >  
                         Account
                     </FontText>
                 </View>
