@@ -3,14 +3,14 @@ import { Text, View } from 'react-native';
 
 
 
-const NewBet = () => {
+const Cart = () => {
     return (
         <View>
             <Text>
-                NewBet
+                Cart
             </Text>
         </View>
     );
 }
 
-export default NewBet;
+export default Cart;

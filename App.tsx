@@ -3,14 +3,14 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import FontText from './components/FontText/FontText';
-import StackManager from './routes/navigation/Stack';
 import { Provider as PaperProvider } from 'react-native-paper';
+import TabManager from './routes/navigation/Tab';
 
 export default function App() {
   return (
     <NavigationContainer>
       <PaperProvider>
-        <StackManager/>
+        <TabManager/>
       </PaperProvider>
     </NavigationContainer>
   );
