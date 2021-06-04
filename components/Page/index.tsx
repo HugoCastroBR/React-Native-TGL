@@ -1,14 +1,16 @@
 import React from 'react';
 import { Button, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import Footer from '../Partials/Footer/Footer';
 import Header from '../Partials/Header/Header';
+import { PageContentContainer } from './style';
 
 
 const Page = ({
     children,
     navigation,
-    header=true,
-    footer=true
+    header=false,
+    footer=false
 }
     :{
         children:React.ReactNode,
@@ -18,11 +20,11 @@ const Page = ({
     }) => {
     return(
         <View style={{flex: 1}} >
-            <Header navigation={navigation}/>
-            <ScrollView style={{paddingTop:0,backgroundColor:'red',height:"200%"}}>
-                <View style={{paddingTop:0,backgroundColor:'green',height:700}}></View>
+            {header && <Header navigation={navigation}/>}
+            <PageContentContainer>
                 {children}
-            </ScrollView>
+            </PageContentContainer>
+            {footer && <Footer/>}
         </View>
         
     )

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import styled  from 'styled-components/native';
 
 
@@ -13,6 +13,10 @@ export const HeaderContainer = styled.View`
 
 export const MainButtonsContainer = styled.View`
     flex-direction: row;
-    margin-top: 10px;
-    
+    margin-top: 12px;
+
+    width: 50%;
+    justify-content: flex-end;
+    height: 32px
+
 `

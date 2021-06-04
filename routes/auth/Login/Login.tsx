@@ -11,7 +11,7 @@ const Login = () => {
     const navitgation = useNavigation()
 
     return (
-        <Page>
+        <Page footer>
             <Text>
                 Login
             </Text>

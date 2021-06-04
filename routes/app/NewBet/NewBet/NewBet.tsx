@@ -10,7 +10,7 @@ const NewBet = ({ navigation }: {navigation:any}) => {
 
 
     return (
-        <Page navigation={navigation}>
+        <Page navigation={navigation} header>
             <View style={{marginTop:100}}>
                 <FontText >
                     NewBet

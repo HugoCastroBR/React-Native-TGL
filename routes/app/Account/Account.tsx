@@ -1,15 +1,16 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import Page from './../../../components/Page/index';
 
 
 
 const Account = () => {
     return (
-        <View>
+        <Page header>
             <Text>
                 Account
             </Text>
-        </View>
+        </Page>
     );
 }
 
