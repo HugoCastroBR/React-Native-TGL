@@ -8,4 +8,5 @@ export const FooterContainer = styled.View`
     align-items: center;
     height: 60px;
     background-color: ${props => props.theme.BgLight2};
+    margin-top: 56px
 `

@@ -29,7 +29,9 @@ const TabManager = () => {
                 borderTopLeftRadius:16,
                 borderTopRightRadius:16,
                 elevation:0,
-                bottom: 0
+                bottom: 0,
+                paddingLeft: 16,
+                paddingRight: 16,
             
             }
         }}
@@ -55,11 +57,9 @@ const TabManager = () => {
                         borderWidth:4,
                         borderColor:'white',
                         borderRadius: 100,
-                        elevation: 0,
-                        shadowColor: "#0000002E",
-                        shadowOpacity: 1,
-                        shadowOffset: {width:0,height:3},
-
+                        elevation: 4,
+                        marginBottom: 22
+                        
                         }}>
                             <NewBetIcon/>
                         </View>}

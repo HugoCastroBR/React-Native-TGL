@@ -9,7 +9,7 @@ const NewBetIcon = () => {
 
     const navigation = useNavigation()
 
-    const size = 80
+    const size = 84
     return (
         <View style={{width:size, height:size}} >
             <Svg width={`${size}`} height={`${size}`} viewBox="0 0 68 68" fill="none" onPress={() => navigation.navigate('NewBet')}>

@@ -22,9 +22,12 @@ const Page = ({
         <View style={{flex: 1}} >
             {header && <Header navigation={navigation}/>}
             <PageContentContainer>
+                <View style={{flex: 1}}>
                 {children}
+                </View>
+                {footer && <Footer/>}
             </PageContentContainer>
-            {footer && <Footer/>}
+            
         </View>
         
     )

@@ -22,7 +22,7 @@ const AuthTabManager = () => {
             
         }}
         screenOptions={{
-            // tabBarVisible: false
+            tabBarVisible: false
         }}
         >
             <Tab.Screen name="Login" component={Login} options={{
