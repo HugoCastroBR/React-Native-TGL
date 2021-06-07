@@ -34,7 +34,9 @@ const ResetPassword = () => {
                     <LogoContainer >
                         <TglLogo size={1.8}/>
                     </LogoContainer>
+
                     <FontText italic Weight="bold" size={36} color="#707070">Reset Password</FontText>
+                    
                 </TitleContainer>
                 <AuthFormTemplate name="ResetPasswordForm" >
                     <InputContainer>
