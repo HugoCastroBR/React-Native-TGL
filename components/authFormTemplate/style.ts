@@ -61,7 +61,7 @@ export const InputItem = styled.View`
 
 `
 
-export const ForgetPasswordContainer = styled.View`
+export const ForgetPasswordContainer = styled.TouchableOpacity`
     margin-top: 20px;
     width: 300px;
     flex-direction: row;

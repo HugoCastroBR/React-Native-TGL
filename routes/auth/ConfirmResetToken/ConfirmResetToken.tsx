@@ -11,13 +11,13 @@ import FontText from '../../../components/FontText/FontText';
 import Page from '../../../components/Page';
 import TglLogo from '../../../components/TglLogo/TglLogo';
 import { AuthInputType } from '../../../types';
-import { AuthContainer, ErrorContainer, FormContainer, LogoContainer, TitleContainer } from './style';
+import { AuthContainer, FormContainer, TitleContainer, LogoContainer, ErrorContainer } from '../Login/style';
 import Footer from './../../../components/Partials/Footer/Footer';
 
 
 
 
-const Login = () => {
+const ConfirmResetToken = () => {
 
     const navigation = useNavigation()
 
@@ -34,31 +34,29 @@ const Login = () => {
                     <LogoContainer >
                         <TglLogo size={1.8}/>
                     </LogoContainer>
-                    <FontText italic Weight="bold" size={36} color="#707070">Authentication</FontText>
+                    <FontText italic Weight="bold" size={36} color="#707070">Confirm Token</FontText>
                 </TitleContainer>
-                <AuthFormTemplate name="LoginForm" >
+                <AuthFormTemplate name="ConfirmResetTokenForm" >
                     <InputContainer>
 
-                        <AuthInput label="Email" type="email"/>
-                        <AuthInput hidden label="Password" type="password" actionChange={setEmail}/>
+                        <AuthInput label="Token" />
 
-                        <ForgetPasswordContainer onPress={() => {navigation.navigate('ForgotPassword')}}>
-                            <FontText italic color="#C1C1C1">I forget my password</FontText>
-                        </ForgetPasswordContainer>
                     </InputContainer>
                     <ErrorContainer>
                         <FontText color="red" font="Light" size={14 }>Error</FontText>
                     </ErrorContainer>
                     <ButtonSendStyle>
-                        <SimpleButton Arrow={true} Color={"#B5C401"} ArrowSize={[50, 40]} AuthTemplate={true} PressAction={() => {navigation.navigate("App")}}>
-                            <FontText color={"#B5C401"} size={30} italic Weight="bold">Log in</FontText>
+                        <SimpleButton Arrow={true} Color={"#B5C401"} ArrowSize={[50, 40]} AuthTemplate={true} PressAction={() => {navigation.navigate("ResetPassword")}}>
+                            <FontText color={"#B5C401"} size={30} italic Weight="bold">Continue</FontText>
                         </SimpleButton>
                     </ButtonSendStyle>
                 </AuthFormTemplate>
                 </FormContainer>
-                <SimpleButton Arrow={true} Color={"#707070"} ArrowSize={[50, 40]} AuthTemplate={true} PressAction={() => {navigation.navigate("Register")}}>
-                    <FontText color={"#707070"} size={30} italic Weight="bold">Sign up</FontText>
-                </SimpleButton>
+                <View style={{marginRight:36}}>
+                    <SimpleButton Arrow={true} Color={"#707070"} ArrowSize={[50, 40]} AuthTemplate={true} ReverseArrow PressAction={() => {navigation.navigate("ForgotPassword")}}>
+                        <FontText color={"#707070"} size={30} italic Weight="bold">Back</FontText>
+                    </SimpleButton>
+                </View>
                 <View style={{alignItems:'center',width:'100%',marginTop: -50}}>
                     <Footer/>
                 </View>
@@ -66,10 +64,10 @@ const Login = () => {
 
             {/* <Button style={{marginTop: 100}} onPress={() => {
                 navitgation.navigate('App')
-            }}>Login</Button> */}
+            }}>ConfirmResetToken</Button> */}
 
         </Page>
     );
 }
 
-export default Login;
+export default ConfirmResetToken;

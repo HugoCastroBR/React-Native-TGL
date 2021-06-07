@@ -10,6 +10,8 @@ import ForgotPassword from '../../auth/ForgotPassword/ForgotPassword';
 import Login from '../../auth/Login/Login';
 import Register from '../../auth/Register/Register';
 import Account from '../../app/Account/Account';
+import ResetPassword from '../../auth/ResetPassword/ResetPassword';
+import ConfirmResetToken from '../../auth/ConfirmResetToken/ConfirmResetToken';
 
 
 const Tab = createBottomTabNavigator();
@@ -57,6 +59,31 @@ const AuthTabManager = () => {
                 </View>
             )
             }} />
+
+
+            <Tab.Screen name="ResetPassword" component={ResetPassword} options={{
+
+            tabBarIcon: ({ focused }) => (
+                <View>
+                    <FontText>  
+                    ForgotPassword
+                    </FontText>
+                </View>
+            )
+            }} />
+
+
+            <Tab.Screen name="ConfirmResetToken" component={ConfirmResetToken} options={{
+
+            tabBarIcon: ({ focused }) => (
+                <View>
+                    <FontText>  
+                    ForgotPassword
+                    </FontText>
+                </View>
+            )
+            }} />
+
 
 
             {/* Dont Show */}
