@@ -5,9 +5,11 @@ import TglLogo from '../../TglLogo/TglLogo';
 import { HeaderContainer, MainButtonsContainer } from './style';
 
 import CartIcon from './../../icons/cartIcon';
+import CurrentBet from '../../CurrentBet/CurrentBet';
 
 const Header = ({navigation}:{navigation?:any}) => {
     return (
+  
         <HeaderContainer >
             <TglLogo/>
             <MainButtonsContainer> 
@@ -15,7 +17,9 @@ const Header = ({navigation}:{navigation?:any}) => {
                 <LogoutIcon/>
                 
             </MainButtonsContainer>
+            
         </HeaderContainer>
+
     )
 }
 

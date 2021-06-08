@@ -2,12 +2,13 @@ import styled from "styled-components/native";
 
 
 export const CurrentBetContainer = styled.View`
+    
     background-color: rgba(255, 255, 255, 0.8);
     width:100%;
     opacity: 1;
     z-index: 20;
+    
 `
-
 export const RecentGamesTitle = styled.View`
 	width: 100%;
 
@@ -85,7 +86,8 @@ export const DeleteNumber = styled.TouchableOpacity`
 `
 
 export const EndContainer = styled.View`
-    margin-top: 8px;
+    margin-top: 6px;
+    margin-bottom: 6px;
     width: 100%;
     height: 10px;
     justify-content: center;
