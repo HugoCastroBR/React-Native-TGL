@@ -30,7 +30,7 @@ const Page = ({
                 
                 {header && <Header navigation={navigation}/>}
                 {/* {nav && nav} */}
- 
+
             <PageContentContainer>
                 
                 <View style={{flex: 1}}>

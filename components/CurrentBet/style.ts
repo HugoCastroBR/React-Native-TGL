@@ -5,6 +5,7 @@ export const CurrentBetContainer = styled.View`
     background-color: rgba(255, 255, 255, 0.8);
     width:100%;
     opacity: 1;
+    z-index: 20;
 `
 
 export const RecentGamesTitle = styled.View`
@@ -84,6 +85,7 @@ export const DeleteNumber = styled.TouchableOpacity`
 `
 
 export const EndContainer = styled.View`
+    margin-top: 8px;
     width: 100%;
     height: 10px;
     justify-content: center;
@@ -112,4 +114,23 @@ export const GameRulesDesc = styled.View`
     margin-top: 24px;
     margin-bottom: 8px;
 
+`
+
+export const GameOptionsContainer = styled.View`
+    flex-direction: row;
+    width: 92%;
+    margin-left: 4%;
+    justify-content: space-between;
+    align-items: center;
+`
+
+export const GameOptionBtn = styled.TouchableOpacity<{Highlight?:boolean}>`
+    background-color: ${(props) => `${props.Highlight? "#B5C401":"transparent"}`};
+    border-width: 1px;
+    border-color: #B5C401;
+    border-radius: 4px;
+    height: 32px;
+    width: 112px;
+    justify-content: center;
+    align-items: center;   
 `

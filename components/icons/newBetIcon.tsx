@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import Svg, { Path, G, Circle, Line } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 
@@ -11,7 +12,7 @@ const NewBetIcon = () => {
 
     const size = 84
     return (
-        <View style={{width:size, height:size}} >
+        <TouchableOpacity style={{width:size, height:size}} onPress={() => navigation.navigate('NewBet')} activeOpacity={1}>
             <Svg width={`${size}`} height={`${size}`} viewBox="0 0 68 68" fill="none" onPress={() => navigation.navigate('NewBet')}>
                 <Circle cx="34" cy="34" r="34" fill="#B5C300"/>
                 <Circle cx="48" cy="50" r="10" stroke="white" stroke-width="2"/>
@@ -26,8 +27,8 @@ const NewBetIcon = () => {
                 <Line x1="18.5858" y1="20" x2="17" y2="18.4142" stroke="white" stroke-width="2" stroke-linecap="round"/>
                 <Line x1="20" y1="49.4142" x2="18.4142" y2="51" stroke="white" stroke-width="2" stroke-linecap="round"/>
                 <Path d="M52 49.0769V50.9231H48.9231V54H47.0769V50.9231H44V49.0769H47.0769V46H48.9231V49.0769H52Z" fill="white"/>
-                </Svg>
-        </View>
+            </Svg>
+        </TouchableOpacity>
 
 
     )
