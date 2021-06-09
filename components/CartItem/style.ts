@@ -7,7 +7,7 @@ type CartItemProps = {
 export const CartItemStyle = styled.View`
 	width: 100%;
     margin-top: 10px;
-    
+    margin-bottom: 4px;
 `;
 
 export const DeleteContainer = styled.View`

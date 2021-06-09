@@ -8,7 +8,7 @@ import { GameSelectButton } from './style';
 
 
 
-const FilterSelect = () => {
+const GameSelect = () => {
 
     const Filters:GameSelectButtonType[] = [
         {
@@ -68,4 +68,4 @@ const FilterSelect = () => {
     )
 }
 
-export default FilterSelect;
+export default GameSelect;

@@ -7,6 +7,7 @@ import FilterSelect from '../../containers/filterSelect';
 import { RecentGamesTitle, FiltersContainer, FilterTitleContainer, CurrentNumber, CurrentNumbersContainer, DeleteNumber, EndContainer, EndItem, CurrentBetContainer, GameRulesDesc, GameSelectorContainer, TitleContainer, GameOptionBtn, GameOptionsContainer } from './style';
 
 import ActionSheet from "react-native-actions-sheet";
+import GameSelect from './../../containers/gameSelect/index';
 
 
 const actionSheetRef = createRef<ActionSheet>();
@@ -14,10 +15,10 @@ const actionSheetRef = createRef<ActionSheet>();
 
 const CurrentBet = () => {
 
-    const ShowNumbers = true
+    const ShowNumbers = false
 
 
-    
+
 
 
     const Numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -33,7 +34,7 @@ const CurrentBet = () => {
                     <FilterTitleContainer>
                         <FontText size={20} italic color="#707070">Choose a game</FontText>
                     </FilterTitleContainer>
-                    <FilterSelect />
+                    <GameSelect />
                     <View>
                         {!ShowNumbers && <GameRulesDesc>
                             <FontText>Fill your bet</FontText>
@@ -57,23 +58,26 @@ const CurrentBet = () => {
                 ))}
 
             </CurrentNumbersContainer>}
-                
 
-            <GameOptionsContainer>
-                <GameOptionBtn>
-                    <FontText color="#B5C401" size={14}>Complete Game</FontText>
-                </GameOptionBtn>
-                <GameOptionBtn>
-                    <FontText color="#B5C401" size={14}>Clear Game</FontText>
-                </GameOptionBtn>
-                <GameOptionBtn Highlight>
-                    <FontText color="white" size={14}>Add to Cart</FontText>
-                </GameOptionBtn>
-            </GameOptionsContainer>
-            
+            {
+                ShowNumbers &&
+
+                <GameOptionsContainer>
+                    <GameOptionBtn>
+                        <FontText color="#B5C401" size={14}>Complete Game</FontText>
+                    </GameOptionBtn>
+                    <GameOptionBtn>
+                        <FontText color="#B5C401" size={14}>Clear Game</FontText>
+                    </GameOptionBtn>
+                    <GameOptionBtn Highlight>
+                        <FontText color="white" size={14}>Add to Cart</FontText>
+                    </GameOptionBtn>
+                </GameOptionsContainer>
+            }
+
 
             <EndContainer>
-                <EndItem onPress={() => {actionSheetRef?.current?.setModalVisible()}}></EndItem>
+                <EndItem onPress={() => { actionSheetRef?.current?.setModalVisible() }}></EndItem>
 
             </EndContainer>
         </CurrentBetContainer>

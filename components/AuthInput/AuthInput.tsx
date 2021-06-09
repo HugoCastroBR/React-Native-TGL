@@ -10,9 +10,10 @@ import { AuthInputStyle } from './style';
 
 const AuthInput = (
     {
-        hidden=false,
+        hidden,
         label="",
         type="username",
+        value="",
         actionChange
     }
     :
@@ -21,7 +22,8 @@ const AuthInput = (
 
 
 
-    const [hiddenState, setHiddenState] = useState(true)
+    const [hiddenState, setHiddenState] = useState(hidden)
+    const [valueState, setValueState] = useState(value)
 
     return (
         <AuthInputStyle
@@ -32,7 +34,11 @@ const AuthInput = (
             underlineColor="#9D9D9D"
             outlineColor="#9D9D9D"
             right={hidden && <AuthInputStyle.Icon onPress={() => setHiddenState(!hiddenState)} name="eye" />}
-            onChangeText={(event) =>  actionChange?.(event)}
+            onChangeText={(event) =>  {
+                setValueState(event)
+                actionChange?.(event)
+            }}
+            value={valueState}
         />
     )
 }

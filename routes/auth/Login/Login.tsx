@@ -13,6 +13,7 @@ import TglLogo from '../../../components/TglLogo/TglLogo';
 import { AuthInputType } from '../../../types';
 import { AuthContainer, ErrorContainer, FormContainer, LogoContainer, TitleContainer } from './style';
 import Footer from './../../../components/Partials/Footer/Footer';
+import SplashImage from '../../../components/Splash/Splash';
 
 
 
@@ -26,7 +27,9 @@ const Login = () => {
 
 
     return (
-        <Page>
+        <Page >
+
+            <SplashImage/>
             
             <AuthContainer >
                 <FormContainer >

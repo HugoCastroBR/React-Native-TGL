@@ -10,7 +10,7 @@ const TglLogo = ({size=1}:{size?:number}) => {
     const TabNavigation = useNavigation()
 
     return(
-        <TglLogoContainer onPress={() => TabNavigation.navigate("App")} size={80 * size}>
+        <TglLogoContainer onPress={() => TabNavigation.navigate("Home")} size={80 * size}>
             <FontText italic Weight="bold" color="#707070" size={30 * size}>
                 TGL
             </FontText>

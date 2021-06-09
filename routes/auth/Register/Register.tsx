@@ -8,6 +8,7 @@ import AuthFormTemplate from '../../../components/authFormTemplate';
 import { ButtonSendStyle, ForgetPasswordContainer, InputContainer, InputItem, InputStyle } from '../../../components/authFormTemplate/style';
 import AuthInput from '../../../components/AuthInput/AuthInput';
 import FontText from '../../../components/FontText/FontText';
+import LoadingScreen from '../../../components/Loading';
 import Page from '../../../components/Page';
 import TglLogo from '../../../components/TglLogo/TglLogo';
 import { AuthInputType } from '../../../types';
@@ -23,12 +24,17 @@ const Register = () => {
 
     const [email,setEmail] = useState('')
     const [password, setPassword] = useState('')
-
+    const [end , setEnd] = useState(false)
 
     return (
         <Page>
-            
-            <AuthContainer >
+
+            {
+                end &&
+                <LoadingScreen redirect="Login"/>
+            }
+
+            <AuthContainer >    
                 <FormContainer >
                 <TitleContainer >
                     <LogoContainer >
@@ -56,7 +62,7 @@ const Register = () => {
                 </AuthFormTemplate>
                 </FormContainer>
                 <View style={{marginRight:36}}>
-                    <SimpleButton Arrow={true} Color={"#707070"} ArrowSize={[50, 40]} AuthTemplate={true} ReverseArrow PressAction={() => {navigation.navigate("Login")}}>
+                    <SimpleButton Arrow={true} Color={"#707070"} ArrowSize={[50, 40]} AuthTemplate={true} ReverseArrow PressAction={() => {setEnd(true)}}>
                         <FontText color={"#707070"} size={30} italic Weight="bold">Back</FontText>
                     </SimpleButton>
                 </View>
