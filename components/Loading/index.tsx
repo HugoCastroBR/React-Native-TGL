@@ -11,6 +11,9 @@ import { useNavigation } from '@react-navigation/native';
 
 const LoadingScreen = ({action,error,redirect}:{action?:any, error?:boolean,redirect:string}) => {
 
+
+
+    
     const Navigation = useNavigation()
     const [isError, setIsError] = useState(false)
     const [isSuccess, setSuccess] = useState(false)

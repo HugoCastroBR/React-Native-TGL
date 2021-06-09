@@ -12,7 +12,8 @@ import { useFonts } from 'expo-font';
 import * as Font from 'expo-font';
 import theme from './theme/PaperTheme';
 
-
+import { Provider } from 'react-redux';
+import store from './store';
 
 export default function App() {
 
@@ -49,14 +50,16 @@ export default function App() {
 
   if(fontloaded){
     return (
-
-      <NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
         <ThemeProvider theme={defaultTheme}>
           <PaperProvider theme={theme}>
             <StackManager/>
           </PaperProvider>
         </ThemeProvider>
       </NavigationContainer>
+      </Provider>
+      
       
     );
   }else{
