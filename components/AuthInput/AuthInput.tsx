@@ -3,7 +3,7 @@ import { SetStateAction } from 'react';
 import { useRef } from 'react';
 import { AuthInputType } from '../../types';
 import { AuthInputStyle } from './style';
-
+import { useFocusEffect } from '@react-navigation/native';
 
 
 
@@ -11,16 +11,23 @@ import { AuthInputStyle } from './style';
 const AuthInput = (
     {
         hidden,
-        label="",
-        type="username",
-        value="",
+        label = "",
+        type = "username",
+        value = "",
         actionChange
     }
-    :
-    AuthInputType & {actionChange?:React.Dispatch<SetStateAction<string>>}
-    ) => {
+        :
+        AuthInputType & { actionChange?: React.Dispatch<SetStateAction<string>> }
+) => {
 
 
+    useFocusEffect(
+        React.useCallback(() => {
+            const unsubscribe = () => {setValueState("")};
+
+            return () => unsubscribe();
+        }, [])
+    )
 
     const [hiddenState, setHiddenState] = useState(hidden)
     const [valueState, setValueState] = useState(value)
@@ -34,7 +41,7 @@ const AuthInput = (
             underlineColor="#9D9D9D"
             outlineColor="#9D9D9D"
             right={hidden && <AuthInputStyle.Icon onPress={() => setHiddenState(!hiddenState)} name="eye" />}
-            onChangeText={(event) =>  {
+            onChangeText={(event) => {
                 setValueState(event)
                 actionChange?.(event)
             }}

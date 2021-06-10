@@ -9,6 +9,13 @@ import Page from './../../../components/Page/index';
 
 
 const Account = () => {
+
+    // useEffect(() => {
+
+    // },[])
+
+    const { states,dispatch } = useTGL()
+
     return (
         <Page header>
             <KeyboardAvoidingView
@@ -18,7 +25,7 @@ const Account = () => {
 
                 <ScrollView contentContainerStyle={{ alignItems: 'center', height: 700, justifyContent: 'space-around', paddingBottom: 100 }}>
                     <FontText italic Weight="bold" color="#717171" size={36} >Account</FontText>
-                    <AuthInput label="Name" type="username" value="HugoCastroBR" />
+                    <AuthInput label="Name" type="username"  value={}/>
                     <AuthInput label="Phone Number" type="tel" />
                     <AuthInput label="Email" type="email" />
                     <AuthInput label="About" />

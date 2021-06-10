@@ -1,6 +1,6 @@
-import { Link, useNavigation } from '@react-navigation/native';
-import React, { useEffect, useRef, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Link, useFocusEffect, useNavigation } from '@react-navigation/native';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import SimpleButton from '../../../components/arrowButton/arrowButton';
 import AuthFormTemplate from '../../../components/authFormTemplate';
@@ -15,9 +15,13 @@ import { AuthContainer, ErrorContainer, FormContainer, LogoContainer, TitleConta
 import Footer from './../../../components/Partials/Footer/Footer';
 import SplashImage from '../../../components/Splash/Splash';
 import useTGL from './../../../hooks/useStore';
-import { AuthSetMessage } from './../../../store/actions';
+import { AuthSetMessage, SetLoading, SetGlobalError, SetNextPage } from './../../../store/actions';
 import { useCallback } from 'react';
 import { tryAuth } from '../../../store/FetchActions/FetchAuth';
+import LoadingScreen from '../../../components/Loading';
+import RetryLoading from '../../../components/Retry Load';
+import { Ionicons } from '@expo/vector-icons';
+import useStartingLoad from './../../../hooks/useLoad';
 
 
 
@@ -32,6 +36,7 @@ const Login = () => {
 
     const {states, dispatch} = useTGL() 
 
+    
 
 
     const setMessage = useCallback((message='',messageColor='red') => {
@@ -40,6 +45,7 @@ const Login = () => {
     },[states.Auth.message])
 
     useEffect(() => {
+        
         if(email == '' && password == ''){
             console.log("empty")
         }else{
@@ -47,15 +53,30 @@ const Login = () => {
         }
     },[email,password])
 
+
+    useLayoutEffect(() => {
+        
+        dispatch(SetLoading(false))
+        
+        dispatch(AuthSetMessage('','green'))
+    },[])
+
     useEffect(() =>  setMessage(),[])
 
-    const FunctionLogin = () => {
+    
 
+    const FunctionLogin = () => {
         if(ValidAllInputs()){
-        
+                // dispatch(SetNextPage('App'))
+                // dispatch(SetLoading(true))
+                // dispatch(SetGlobalError(false))
+
+                useStartingLoad('App')
+                
                 dispatch(tryAuth(email,password))
                 setMessage("Tentando entrar...","green")
-
+                console.log("foooi")
+                
             }
         }
 
@@ -103,7 +124,16 @@ const Login = () => {
         <Page >
 
             <SplashImage/>
-            
+
+            <LoadingScreen  />
+            <RetryLoading>
+                    <TouchableOpacity style={{ alignContent: 'center', justifyContent: 'center' }} onPress={() => {
+                        FunctionLogin()
+                    }}>
+                        <Ionicons name="reload-circle-outline" size={50} color="black" />
+                    </TouchableOpacity>
+            </RetryLoading>
+
             <AuthContainer >
                 <FormContainer >
                 <TitleContainer >
@@ -130,7 +160,6 @@ const Login = () => {
                             // navigation.navigate("App")
 
                             // dispatch(AuthSetMessage("Error","red"))
-
                             FunctionLogin()
                     }}>
                             <FontText color={"#B5C401"} size={30} italic Weight="bold">Log in</FontText>

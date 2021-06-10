@@ -2,18 +2,21 @@ import React from 'react';
 import { View } from 'react-native';
 import Svg, { Path, G } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native';
+import useTGL from './../../hooks/useStore';
+import { FetchLogout } from './../../store/FetchActions/FetchAuth';
 
 
 
 const LogoutIcon = () => {
 
     const navigation = useNavigation()
-
+    const {states, dispatch} = useTGL()
     return (
         <View style={{width:26, height:26}} >
             <Svg id="Capa_1" x="0px" y="0px"
                 viewBox="0 0 512 512" fill="#C1C1C1" width="100%" height="100%"
                 onPress={() => {
+                    dispatch(FetchLogout())
                     navigation.navigate('Auth')
                 }}
                 >

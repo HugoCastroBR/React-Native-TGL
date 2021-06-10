@@ -1,6 +1,6 @@
 import { Link, useNavigation } from '@react-navigation/native';
-import React, { useRef, useState } from 'react';
-import { Text, View } from 'react-native';
+import React, { useCallback, useRef, useState } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import SimpleButton from '../../../components/arrowButton/arrowButton';
 import AuthFormTemplate from '../../../components/authFormTemplate';
@@ -9,10 +9,20 @@ import { ButtonSendStyle, ForgetPasswordContainer, InputContainer, InputItem, In
 import AuthInput from '../../../components/AuthInput/AuthInput';
 import FontText from '../../../components/FontText/FontText';
 import Page from '../../../components/Page';
+import RetryLoading from '../../../components/Retry Load';
 import TglLogo from '../../../components/TglLogo/TglLogo';
+import { useSuccessLoad } from '../../../hooks/useLoad';
+import useTGL from '../../../hooks/useStore';
+import { AuthSetMessage, SetLoading } from '../../../store/actions';
 import { AuthInputType } from '../../../types';
 import { AuthContainer, FormContainer, TitleContainer, LogoContainer, ErrorContainer } from '../Login/style';
 import Footer from './../../../components/Partials/Footer/Footer';
+import useStartingLoad from './../../../hooks/useLoad';
+
+import { Ionicons } from '@expo/vector-icons';
+import { tryResetPassword } from './../../../store/FetchActions/FetchAuth';
+import { useEffect } from 'react';
+import LoadingScreen from '../../../components/Loading';
 
 
 
@@ -22,11 +32,52 @@ const ForgotPassword = () => {
     const navigation = useNavigation()
 
     const [email,setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const { states,dispatch } = useTGL()
 
+    useEffect(() => {
+        dispatch(SetLoading(false))
+        dispatch(AuthSetMessage('','green'))
+    },[])
+
+    const setMessage = useCallback((message='',messageColor='red') => {
+        dispatch(AuthSetMessage(message,messageColor))
+    },[states.Auth.message])
+
+
+    const FunctionForgot = () => {
+        if(validEmail(email)){
+            useStartingLoad('ForgotPassword')
+            dispatch(tryResetPassword(email))
+        }
+
+    }
+
+    const validEmail = (email: string) => {
+        if(email){
+            if(/^[^@]+@\w+(\.\w+)+\w$/.test(email)){
+                setMessage('')
+                return true
+            }else{
+                setMessage('Invalid Email')
+                return false
+            }
+            
+        }else{
+            setMessage('The Email field have to be filled')
+            return false
+        }
+    }
 
     return (
         <Page>
+            <LoadingScreen/>
+            <RetryLoading>
+                    <TouchableOpacity style={{ alignContent: 'center', justifyContent: 'center' }} onPress={() => {
+                        FunctionForgot()
+                    }}>
+                        <Ionicons name="reload-circle-outline" size={50} color="black" />
+                    </TouchableOpacity>
+            </RetryLoading>
             
             <AuthContainer >
                 <FormContainer >
@@ -39,22 +90,28 @@ const ForgotPassword = () => {
                 <AuthFormTemplate name="ForgotPasswordForm" >
                     <InputContainer>
 
-                        <AuthInput label="Email" type="email"/>
+                        <AuthInput label="Email" type="email" actionChange={setEmail}/>
                         
 
                     </InputContainer>
                     <ErrorContainer>
-                        <FontText color="red" font="Light" size={14 }>Error</FontText>
+                        <FontText color={states.Auth.messageColor} font="Light" size={14 }>{states.Auth.message}</FontText>
                     </ErrorContainer>
                     <ButtonSendStyle>
-                        <SimpleButton Arrow={true} Color={"#B5C401"} ArrowSize={[50, 40]} AuthTemplate={true} PressAction={() => {navigation.navigate("ConfirmResetToken")}}>
+                        <SimpleButton Arrow={true} Color={"#B5C401"} ArrowSize={[50, 40]} AuthTemplate={true} PressAction={() => {
+                            FunctionForgot()
+                        }}>
                             <FontText color={"#B5C401"} size={30} italic Weight="bold">Send</FontText>
                         </SimpleButton>
                     </ButtonSendStyle>
                 </AuthFormTemplate>
                 </FormContainer>
                 <View style={{marginRight:36}}>
-                    <SimpleButton Arrow={true} Color={"#707070"} ArrowSize={[50, 40]} AuthTemplate={true} ReverseArrow PressAction={() => {navigation.navigate("Login")}}>
+                    <SimpleButton Arrow={true} Color={"#707070"} ArrowSize={[50, 40]} AuthTemplate={true} ReverseArrow PressAction={() => {
+                        navigation.navigate('Login')
+                        useStartingLoad('App')
+                        useSuccessLoad()
+                    }}>
                         <FontText color={"#707070"} size={30} italic Weight="bold">Back</FontText>
                     </SimpleButton>
                 </View>

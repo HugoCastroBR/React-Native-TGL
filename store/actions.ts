@@ -1,6 +1,6 @@
 import { AuthActions } from "."
 import { GameDataProps, SavedGame } from "../types"
-import { GameActions } from './index';
+import { GameActions, AppActions } from './index';
 
 
 // -- Auth Actions -- //
@@ -67,4 +67,24 @@ export const SetCartErrorMsg = (msg:string,color:string) =>{  // Set a error/suc
 
 export const ResetCart = () => {  // Clean the Cart
     return GameActions.RESET_CART()
+}
+
+
+// -- App Actions -- //
+
+export const SetLoading = (value: boolean) => {
+    return AppActions.SET_LOADING(value)
+}
+
+export const SetGlobalError = (value: boolean) => {
+    return AppActions.SET_GLOBAL_ERROR(value)
+}
+
+export const SetLoadingSuccess = (value:boolean) => {
+    return AppActions.SET_LOADING_SUCCESS(value)
+}
+
+
+export const SetNextPage = (S:string) => {
+    return AppActions.SET_NEXT_PAGE(S)
 }

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { removeStorage } from "../../services/AsyncStorage";
 
 
 export const AuthSlice = createSlice({
@@ -19,7 +20,7 @@ export const AuthSlice = createSlice({
 		},
 		LOGOUT(state) {
 			state.isAuth = false;
-			localStorage.removeItem("token")
+			
 		},
 		SET_MESSAGE(state,{payload}:{payload:{message:string,messageColor:string}}){
 			state.message = payload.message
