@@ -192,7 +192,7 @@ const Register = () => {
                     <Footer/>
                 </View>
             </AuthContainer>
-
+                    
             {/* <Button style={{marginTop: 100}} onPress={() => {
                 navitgation.navigate('App')
             }}>Register</Button> */}

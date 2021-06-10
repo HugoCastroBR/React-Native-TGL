@@ -2,7 +2,7 @@ import { useGlobalErrorLoad, useSuccessLoad } from "../../hooks/useLoad";
 import api from "../../services/api";
 import setStorage, { removeStorage } from "../../services/AsyncStorage";
 import { UpdateInfos } from "../../types/";
-import { AuthLogout, SetGlobalError, SetLoading, SetLoadingSuccess, UsersResetRegisterSuccess } from "../actions";
+import { AuthLogout, SetGlobalError, SetLoading, SetLoadingSuccess, SetUser, UsersResetRegisterSuccess } from "../actions";
 import { AuthSetMessage, AuthLogin, UsersRegisterSuccess } from "./../actions";
 import { useErrorLoad } from './../../hooks/useLoad';
 import { getStorage } from './../../services/AsyncStorage';
@@ -215,31 +215,67 @@ export const getUserInfos = () => {
 export const UpdateProfile = (Infos: UpdateInfos) => {
 	// eslint-disable-next-line prefer-const
 	let Body: any = { ...Infos };
-
+	console.log("salvo")
 	Object.entries(Infos).forEach((e) => {
 		if (!e[1] || e[1]?.length < 2) {
 			delete Body[e[0]];
 		}
 	});
 
-	const token = getStorage("token");
-	api.defaults.headers.Authorization = `Bearer ${token}`;
+
+	
 	return (dispatch: any) => {
-		api.put("/update-user", Body)
+		getStorage("token").then((token) => {
+
+			api.defaults.headers.Authorization = `Bearer ${token}`;
+			api.put("/update-user", Body)
 			.then((res) => {
 				dispatch(AuthSetMessage("Success", "green"));
 				dispatch(UsersRegisterSuccess());
+				useSuccessLoad()
 			})
 			.catch((err) => {
+				// console.log("erro:",err.response.data[0].message)
+				useErrorLoad()
 				dispatch(
 					AuthSetMessage(
-						`${err.response.data[0].message.replaceAll("_", " ")}`,
+						`${err?.response?.data[0]?.message.replace("_"," ")}`,
 						"red",
 					),
 				);
 			});
+		})
+		.catch((err) => {
+			console.log("erro2:",err)
+			useGlobalErrorLoad()
+		})
+		
 	};
-};
+}
+
+
+
+export const FetchUser = () => {
+	return (dispatch:any) => {
+		getStorage("token").then(
+			(token) => {
+				if (typeof (token) === "string") {
+					api.defaults.headers.Authorization = `Bearer ${token}`
+					api.get("/user")
+						.then((res) => {
+							dispatch(SetUser({ ...res.data[0] }))
+							console.log("name:", res.data[0])
+							useSuccessLoad()
+						})
+						.catch((err) => {
+							console.log(err)
+							useGlobalErrorLoad()
+						});
+				}
+			}
+		)
+	}
+}
 
 
 export const FetchLogout = () => {

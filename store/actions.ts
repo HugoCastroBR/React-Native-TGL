@@ -1,5 +1,5 @@
 import { AuthActions } from "."
-import { GameDataProps, SavedGame } from "../types"
+import { GameDataProps, SavedGame, UserRes } from "../types"
 import { GameActions, AppActions } from './index';
 
 
@@ -25,6 +25,9 @@ export const UsersResetRegisterSuccess = () => {  // After Register, reset 2 tem
     return AuthActions.RESET_SUCCESS()
 }
 
+export const SetUser = (U:UserRes) => {
+    return AuthActions.SET_USER(U)
+}
 
 // export const SetToken =  (token:string) => {
 //     return AuthActions.SET_USER_TOKEN(token)

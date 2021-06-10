@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { removeStorage } from "../../services/AsyncStorage";
+import { UserRes } from "../../types";
 
 
 export const AuthSlice = createSlice({
@@ -10,7 +11,8 @@ export const AuthSlice = createSlice({
         message: "",
 		messageColor: "red",
 		RegisterSuccess: false,
-		NewAndValidEmail: false
+		NewAndValidEmail: false,
+		User: {} as UserRes,
 	},
 	reducers: {
 		AUTH_USER(state,{payload}:{payload:boolean}) {
@@ -32,8 +34,10 @@ export const AuthSlice = createSlice({
 		RESET_SUCCESS(state){
 			state.RegisterSuccess = false
 			state.NewAndValidEmail = false
+		},
+		SET_USER(state,{payload}:{payload:UserRes}){
+			state.User = payload
 		}
-
 	},
 
 });

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SetStateAction } from 'react';
+import { SetStateAction, useEffect } from 'react';
 import { useRef } from 'react';
 import { AuthInputType } from '../../types';
 import { AuthInputStyle } from './style';

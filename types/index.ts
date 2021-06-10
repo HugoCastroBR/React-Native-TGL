@@ -12,6 +12,7 @@ export type AuthInputType = {
     value?: string;
     hidden?:boolean
     label?:string
+
     type?: "name" | "username" | "password" | "cc-csc" | "cc-exp" | "cc-exp-month" | "cc-exp-year" | "cc-number" | "email" | "postal-code" | "street-address" | "tel" | "off"
 }
 
@@ -63,4 +64,12 @@ export type UpdateInfos = {
     username?:string,
     email?:string,
     about?:string
+}
+
+export type UserRes = {
+    id: number
+    username: string
+    email: string
+    phone_number: string
+    about: string
 }
