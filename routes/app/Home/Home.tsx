@@ -1,12 +1,9 @@
-import React, { useEffect, useLayoutEffect } from 'react';
-import { Button, TouchableOpacity, View } from 'react-native';
+import React, {  useLayoutEffect } from 'react';
+import {  TouchableOpacity  } from 'react-native';
 import FontText from '../../../components/FontText/FontText';
-import { Link, useNavigation } from '@react-navigation/native';
 import Page from '../../../components/Page';
-import NewBetIcon from '../../../components/icons/newBetIcon';
 import RecentGameItem from '../../../components/recentGameItem';
-import SimpleButton from '../../../components/arrowButton/arrowButton';
-import { HomeContainer, RecentGamesTitle, RecentGamesContainer, EmptyRecentGames, FiltersContainer, FilterTitleContainer } from './style';
+import { HomeContainer, RecentGamesTitle, RecentGamesContainer,  FiltersContainer, FilterTitleContainer } from './style';
 import FilterSelect from '../../../containers/filterSelect';
 import { FetchUser } from '../../../store/FetchActions/FetchAuth';
 import useTGL from './../../../hooks/useStore';
@@ -15,23 +12,54 @@ import LoadingScreen from '../../../components/Loading';
 import RetryLoading from '../../../components/Retry Load';
 import { Ionicons } from '@expo/vector-icons';
 import { getUserBets } from '../../../store/FetchActions/FetchBets';
+import { ResetFilters } from '../../../store/actions';
+import { SetRecentGames } from './../../../store/actions';
+import { useEffect } from 'react';
 
 
 
 
 const Home = () => {
-    const navigation = useNavigation()
     const {states,dispatch} = useTGL()
 
     const Load = () => {
+        
         useStartingLoad('Home')
         dispatch(FetchUser())
         dispatch(getUserBets())
+        
     }
 
-    useEffect(() => {
+    useLayoutEffect(() => {
+        dispatch(ResetFilters())
+        dispatch(SetRecentGames([]))
         Load()
     },[])
+
+    useEffect(() => {
+        dispatch(SetRecentGames([]))
+    },[])
+
+    
+
+
+
+
+
+    const GenItems = () => {
+        let toReturn;
+        
+        if(!states.Game.RecentGames.find(e => e.active === true)){
+            toReturn = states.Game.RecentGames.map((element,index) => <RecentGameItem {...element} key={index}></RecentGameItem>)
+        }else{
+            toReturn = states.Game.RecentGames
+                .filter(element => element.active)
+                .map((element,index) => <RecentGameItem {...element} key={index}></RecentGameItem>)
+                .reverse()
+        }
+        
+        return toReturn
+    }
 
     return (
         <Page header>
@@ -50,7 +78,6 @@ const Home = () => {
                 <RecentGamesTitle>
                     <FiltersContainer>
                         <FontText size={30} italic Weight="bold" color="#707070">Recent Games</FontText>
-                        {/* <span>{states.Game.RecentGames.length > 0 && "Filters"}</span> */}
                         <FilterTitleContainer>
                             <FontText size={20} italic  color="#707070">Filters: </FontText>
                         </FilterTitleContainer>
@@ -62,11 +89,9 @@ const Home = () => {
 
                 <RecentGamesContainer>
                     {/* For Recent Games make a Recent Game Item in page */}
-                    {/* {states.Game.RecentGames.length > 0 ? GenItems() : <EmptyRecentGames>No Recent games</EmptyRecentGames>} */}
-                    <RecentGameItem color="blue" data="1/2/2003" numbers={[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]} price={1.2} type="LotoEz" active={false}  />
-                    <RecentGameItem color="red" data="1/2/2003" numbers={[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]} price={1.2} type="LotoEz" active={false}  />
-                    
-                    {states.Game.RecentGames.map((element,index) => <RecentGameItem key={index} {...element} />)}
+                
+
+                    {states.Game.RecentGames.length > 0 ? GenItems() : <FontText>No Recent Games</FontText>}
                     
 
                 </RecentGamesContainer>

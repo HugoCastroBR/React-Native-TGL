@@ -5,7 +5,6 @@ const setStorage = async (key: string, value: string) => {
 		await AsyncStorage.setItem(key, value);
 	} catch (e) {
 		// saving error
-		console.log(e);
 	}
 };
 
@@ -25,7 +24,6 @@ export const removeStorage = async (key: string) => {
 		// remove error
 	}
 
-	console.log("Done.");
 };
 
 export default setStorage;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { View } from 'react-native';
 import FontText from '../../FontText/FontText';
 import { FooterContainer } from './style';
 

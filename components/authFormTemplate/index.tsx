@@ -1,21 +1,14 @@
 import React from 'react';
-import { AuthInputType } from '../../types';
-
 import { AuthFormTemplateStyle } from './style';
-import AuthInput from './../AuthInput/AuthInput';
-import TglLogo from '../TglLogo/TglLogo';
+
 
 
 
 const AuthFormTemplate = ({
     children = "",
-    name="",
-
 
     }:{
     children?: React.ReactNode
-    name?: string
-
     }) => {
 
     

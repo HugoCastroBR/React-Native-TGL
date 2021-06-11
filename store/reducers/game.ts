@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice, current } from "@reduxjs/toolkit";
 import {  SavedGame, GameDataProps } from "../../types/";
 
@@ -50,8 +51,11 @@ export const GameSlice = createSlice({
 				state.RecentGames = state.RecentGames.map(element => {
 				const NewElement:any = {...element}
 				NewElement.active = false
+				console.log("que isso aqui a")
 				return NewElement
 			})
+			}else{
+				state.RecentGames = []
 			}
 			
 		},
@@ -63,6 +67,8 @@ export const GameSlice = createSlice({
 		},
 		ADD_ITEM_TO_CART(state){
 			state.Cart.push({...current(state).CurrentGame})
+
+			
 		},
 		DELETE_ITEM_INTO_CART(state,{payload}:{payload:number}){
 			const OldCart = [...current(state).Cart]

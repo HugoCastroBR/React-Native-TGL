@@ -8,7 +8,8 @@ export const AppSlice = createSlice({
 		isLoading: false,
 		isGlobalError: false,
 		isLoadingSuccess: false,
-		nextPage: ''
+		nextPage: '',
+		isModalVisible: false
 	},
 	reducers: {
         SET_LOADING(state,{payload}:{payload:boolean}){
@@ -22,6 +23,9 @@ export const AppSlice = createSlice({
         },
 		SET_NEXT_PAGE(state,{payload}:{payload:string}){
 			state.nextPage = payload
+		},
+		TOGGLE_MODAL(state,{payload}:{payload:boolean}){
+			state.isModalVisible = payload
 		}
 	},
 

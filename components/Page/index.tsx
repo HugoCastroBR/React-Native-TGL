@@ -1,36 +1,31 @@
 import React from 'react';
-import { Button, Text, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import {  View } from 'react-native';
 import Footer from '../Partials/Footer/Footer';
 import Header from '../Partials/Header/Header';
-import { LoadingContainer, PageContentContainer } from './style';
-import { ActivityIndicator } from 'react-native'
+import { PageContentContainer } from './style';
+import Modal from '../Modal/Modal';
 
 const Page = ({
     children,
     navigation,
     header=false,
     footer=false,
-    nav
 }
     :{
         children:React.ReactNode,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         navigation?:any
         header?: boolean
         footer?: boolean
-        nav?: JSX.Element
     }) => {
+
+
+
     return(
         <View style={{flex: 1}} >
+            <Modal/>
 
-                {/* <LoadingContainer>
-                    <ActivityIndicator size={110} color='#B5C401' />
-                </LoadingContainer> */}
-
-                
                 {header && <Header navigation={navigation}/>}
-                {/* {nav && nav} */}
-
             <PageContentContainer>
                 
                 <View style={{flex: 1}}>

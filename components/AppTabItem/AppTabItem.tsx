@@ -1,9 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Button } from 'react-native-paper';
+
 import FontText from '../FontText/FontText';
-import AccountIcon from '../icons/AccountIcon';
-import HomeIcon from '../icons/HomeIcon';
 import { AppTabItemContainer, DefaultIconContainer, TopBarSelected } from './style';
 
 

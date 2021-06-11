@@ -1,11 +1,9 @@
-import { Link, useNavigation } from '@react-navigation/native';
-import React, { useCallback, useRef, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { Button, TextInput } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+import React, { useCallback,  useState } from 'react';
+import { TouchableOpacity, View } from 'react-native';
 import SimpleButton from '../../../components/arrowButton/arrowButton';
 import AuthFormTemplate from '../../../components/authFormTemplate';
-
-import { ButtonSendStyle, ForgetPasswordContainer, InputContainer, InputItem, InputStyle } from '../../../components/authFormTemplate/style';
+import { ButtonSendStyle,  InputContainer,  } from '../../../components/authFormTemplate/style';
 import AuthInput from '../../../components/AuthInput/AuthInput';
 import FontText from '../../../components/FontText/FontText';
 import Page from '../../../components/Page';
@@ -14,11 +12,9 @@ import TglLogo from '../../../components/TglLogo/TglLogo';
 import { useSuccessLoad } from '../../../hooks/useLoad';
 import useTGL from '../../../hooks/useStore';
 import { AuthSetMessage, SetLoading } from '../../../store/actions';
-import { AuthInputType } from '../../../types';
 import { AuthContainer, FormContainer, TitleContainer, LogoContainer, ErrorContainer } from '../Login/style';
 import Footer from './../../../components/Partials/Footer/Footer';
 import useStartingLoad from './../../../hooks/useLoad';
-
 import { Ionicons } from '@expo/vector-icons';
 import { tryResetPassword } from './../../../store/FetchActions/FetchAuth';
 import { useEffect } from 'react';
@@ -87,7 +83,7 @@ const ForgotPassword = () => {
                     </LogoContainer>
                     <FontText italic Weight="bold" size={36} color="#707070">Forgot Password</FontText>
                 </TitleContainer>
-                <AuthFormTemplate name="ForgotPasswordForm" >
+                <AuthFormTemplate >
                     <InputContainer>
 
                         <AuthInput label="Email" type="email" actionChange={setEmail}/>
@@ -120,9 +116,7 @@ const ForgotPassword = () => {
                 </View>
             </AuthContainer>
 
-            {/* <Button style={{marginTop: 100}} onPress={() => {
-                navitgation.navigate('App')
-            }}>ForgotPassword</Button> */}
+
 
         </Page>
     );

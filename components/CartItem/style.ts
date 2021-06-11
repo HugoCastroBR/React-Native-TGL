@@ -5,9 +5,10 @@ type CartItemProps = {
 };
 
 export const CartItemStyle = styled.View`
-	width: 100%;
+	width: 89%;
     margin-top: 10px;
     margin-bottom: 4px;
+	flex-direction: row;
 `;
 
 export const DeleteContainer = styled.View`

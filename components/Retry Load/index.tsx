@@ -1,27 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Text, View } from 'react-native';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import Footer from '../Partials/Footer/Footer';
-import Header from '../Partials/Header/Header';
-import { ActivityIndicator } from 'react-native'
+import React, { useEffect } from 'react';
+import {  View } from 'react-native';
 import { LoadingScreenContainer } from './style';
 import FontText from '../FontText/FontText';
-import { Ionicons } from '@expo/vector-icons';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { SetGlobalError, SetLoadingSuccess } from '../../store/actions';
+import { useNavigation } from '@react-navigation/native';
 import useTGL from '../../hooks/useStore';
 
 const RetryLoading = ({ children }
     : {   children: React.ReactNode }) => {
 
 
-    const { states, dispatch } = useTGL()
+    const { states } = useTGL()
 
     const Navigation = useNavigation()
-
-    const [retry, setRetry] = useState(0)
-
-
 
 
 

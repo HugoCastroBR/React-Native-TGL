@@ -1,13 +1,13 @@
-import React, { createRef, useRef } from 'react';
-import { Button, Text, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { createRef } from 'react';
+import { View } from 'react-native';
 import FontText from '../FontText/FontText';
-import Page from '../Page';
-import FilterSelect from '../../containers/filterSelect';
-import { RecentGamesTitle, FiltersContainer, FilterTitleContainer, CurrentNumber, CurrentNumbersContainer, DeleteNumber, EndContainer, EndItem, CurrentBetContainer, GameRulesDesc, GameSelectorContainer, TitleContainer, GameOptionBtn, GameOptionsContainer } from './style';
+import { RecentGamesTitle, FiltersContainer, FilterTitleContainer, CurrentNumber, CurrentNumbersContainer, DeleteNumber, EndContainer, EndItem, CurrentBetContainer, GameRulesDesc,  GameOptionBtn, GameOptionsContainer } from './style';
 
 import ActionSheet from "react-native-actions-sheet";
 import GameSelect from './../../containers/gameSelect/index';
+import useTGL from '../../hooks/useStore';
+import { AddItemToCart, SetCartErrorMsg, SetCurrentGame, SetModalVisibility } from '../../store/actions';
+
 
 
 const actionSheetRef = createRef<ActionSheet>();
@@ -15,20 +15,72 @@ const actionSheetRef = createRef<ActionSheet>();
 
 const CurrentBet = () => {
 
-    const ShowNumbers = false
+
+    
+
+
+    const { states, dispatch } = useTGL()
+    const currentGame = states.Game.GamesData.find(e => e.active)
+
+
+    const HandlerDispatch = (numbers: number[]) => {
+        const NowData = new Date()
+        const Data = NowData
+        const data = `${Data.getDay()}/${Data.getMonth()}/${Data.getFullYear()}`
+
+        if(currentGame){
+            dispatch(SetCurrentGame({
+                color: currentGame.color,
+                data,
+                numbers: numbers,
+                price: currentGame.price,
+                type: currentGame.type,
+                active: currentGame.active
+            }))
+        }
+    }
+
+    const RandomComplete = () => {
+
+        let randomNumbers: number[]
+        if (states.Game.CurrentGame.numbers) {
+            randomNumbers = [...states.Game.CurrentGame.numbers]
+        } else {
+            randomNumbers = []
+        } // concat random numbers + current game numbers
+
+        if(currentGame){
+            while (randomNumbers.length < (currentGame['max-number'])) { // while don't have the required number of numbers
+                randomNumbers.push(Math.floor(Math.random() * currentGame.range + 1)) // add a random number to the list
+                // eslint-disable-next-line no-loop-func
+                randomNumbers = randomNumbers.filter((element, index) => randomNumbers.indexOf(element) === index) // remove the repeated numbers
+            }
+            HandlerDispatch(randomNumbers)
+        }
+        
+    }
+
+    const ShowNumbers = states?.Game?.CurrentGame?.numbers?.length > 0 ? true : false
 
 
 
 
+    const HandlerDeletion = (N: number) => {
+        const oldNumbers = [...states.Game.CurrentGame.numbers]
+        const IndexOf = oldNumbers.indexOf(N)
+        console.log(IndexOf)
+        oldNumbers.splice(IndexOf,1)
+        dispatch(SetCurrentGame({...states.Game.CurrentGame,numbers:oldNumbers}))
 
-    const Numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    }
+
     return (
         <CurrentBetContainer >
 
             <RecentGamesTitle>
                 <FiltersContainer>
                     <FontText size={30} italic Weight="bold" color="#707070">
-                        New bet for LOTOMANIA
+                        New bet for {currentGame?.type.toUpperCase()}
                         </FontText>
                     {/* <span>{states.Game.RecentGames.length > 0 && "Filters"}</span> */}
                     <FilterTitleContainer>
@@ -38,7 +90,7 @@ const CurrentBet = () => {
                     <View>
                         {!ShowNumbers && <GameRulesDesc>
                             <FontText>Fill your bet</FontText>
-                            <FontText>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut deserunt saepe sit dolores dolorem. Numquam quasi praesentium odit! Neque laudantium quasi voluptate voluptatem totam sapiente ducimus nulla hic ullam consectetur.</FontText>
+                            <FontText>{currentGame?.description}</FontText>
                         </GameRulesDesc>}
                     </View>
                 </FiltersContainer>
@@ -46,9 +98,9 @@ const CurrentBet = () => {
 
             </RecentGamesTitle>
             {ShowNumbers && <CurrentNumbersContainer>
-                {Numbers.map((element, index) => (
-                    <CurrentNumber key={index}>
-                        <DeleteNumber onPress={() => { console.log("delete number") }}>
+                {states.Game.CurrentGame.numbers.map((element, index) => (
+                    <CurrentNumber key={index} color={currentGame?.color ?currentGame?.color : "red"  }>
+                        <DeleteNumber onPress={() => {HandlerDeletion(element)}}>
                             <FontText color="white" size={14}>x</FontText>
                         </DeleteNumber>
 
@@ -63,13 +115,24 @@ const CurrentBet = () => {
                 ShowNumbers &&
 
                 <GameOptionsContainer>
-                    <GameOptionBtn>
+                    <GameOptionBtn onPress={() => {
+                        RandomComplete()
+                    }}>
                         <FontText color="#B5C401" size={14}>Complete Game</FontText>
                     </GameOptionBtn>
-                    <GameOptionBtn>
+                    <GameOptionBtn onPress={
+                        () => dispatch(SetCurrentGame({...states.Game.CurrentGame,numbers:[]}))
+                    }>
                         <FontText color="#B5C401" size={14}>Clear Game</FontText>
                     </GameOptionBtn>
-                    <GameOptionBtn Highlight>
+                    <GameOptionBtn Highlight
+                    onPress={() => {
+                        dispatch(AddItemToCart())
+                        dispatch(SetCartErrorMsg("Item added to cart","red"))
+                        dispatch(SetModalVisibility(true))
+                        HandlerDispatch([])
+                    }}
+                    >
                         <FontText color="white" size={14}>Add to Cart</FontText>
                     </GameOptionBtn>
                 </GameOptionsContainer>

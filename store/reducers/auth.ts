@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { removeStorage } from "../../services/AsyncStorage";
 import { UserRes } from "../../types";
 
 

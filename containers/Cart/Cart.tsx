@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 import FontText from '../../components/FontText/FontText';
 import CartIcon from '../../components/icons/cartIcon';
 import { CartButtonContainer, CartContainer, CartItemsContainer, CartText, CartTitleContainer, CartTotalContainer, CartTotalContainerText, CartTotalContainerTextLast, CloseCartButton } from './style';
@@ -9,195 +8,75 @@ import { DrawerActions } from '@react-navigation/native';
 import CartItem from '../../components/CartItem';
 import { SavedGame } from '../../types';
 import SimpleButton from '../../components/arrowButton/arrowButton';
-import { color } from 'react-native-reanimated';
+import useTGL from '../../hooks/useStore';
+import { SetCartErrorMsg, ResetCart,SetModalVisibility, SetRecentGames } from '../../store/actions';
+import { addToUserBets } from '../../store/FetchActions/FetchBets';
 
 
 const Cart = () => {
 
     const navigation = useNavigation()
 
+    const {states,dispatch} = useTGL()
 
 
-    const CartItems:SavedGame[] = [
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
+    
 
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-        {
-            numbers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            active: true,
-            color: 'red',
-            data: '1/1/1',
-            price: 1.2,
-            type: "Teste"
-        },
-    ]
 
+    const genTotal = (N:SavedGame[]) => {
+        const NumberArr:number[] = N.map((E:SavedGame) => E.price)
+        const sumReducer = (A:number,C:number) => {return Number(A) + Number(C)}
+        const result = NumberArr.reduce(sumReducer)
+        return String(Number(result).toFixed(2)).replace(".",",")
+    }
+
+
+    const SaveCart = () => {
+        if(states.Game.Cart.length > 0){
+            if(Number(genTotal(states.Game.Cart).replace(",",".")) < 0){
+                dispatch(SetCartErrorMsg("O valor minimo é de R$ 30.00","red"))
+            }else{
+                dispatch(ResetCart())
+                dispatch(SetCartErrorMsg("Compra Salva"))
+                dispatch(SetModalVisibility(true))
+                const elementsToPost = [...states.Game.Cart].map(element => {
+                    const GameId = states.Game.GamesData.find(e => e.type === element.type)
+
+                    if(typeof(GameId?.id) !== 'number'){
+                        return {numbers:element.numbers, game_id: 0}
+                    }else{
+                        return {numbers:element.numbers, game_id: GameId.id}
+                    }
+                    
+                })
+                
+                addToUserBets(elementsToPost)
+                const NewRecentGames:SavedGame[] = elementsToPost.map((element) => {
+                    const currentGame = states.Game.GamesData.find(e => e.id === element.game_id)
+                    if(currentGame){
+                        const now = new Date()
+                        return (
+                            {
+                                active: currentGame.active,
+                                color: currentGame.color,
+                                data: now.toString(),
+                                price: currentGame.price,
+                                type: currentGame.type,
+                                numbers: element.numbers,
+                            } as SavedGame
+                        )
+                    }else{
+                        return {} as SavedGame
+                    }
+                })
+
+                const toSend = [...NewRecentGames,...states.Game.RecentGames]
+                dispatch(SetRecentGames(toSend))
+            }
+        }else{
+            dispatch(SetCartErrorMsg("Carrinho vazio","red"))
+        }
+    }
     return (
 
         <CartContainer>
@@ -214,7 +93,11 @@ const Cart = () => {
                 </CloseCartButton>
             </CartTitleContainer>
             <CartItemsContainer>
-                {CartItems.map((element,index) => <CartItem {...element} index={index} key={index}/>)}
+                {states.Game.Cart.length > 0 ?
+                states.Game.Cart.map((element,index) => <CartItem {...element} index={index} key={index}/>) :
+                <FontText italic Weight="bold" color="#707070" size={20} >Empty Cart</FontText>
+                }
+                {}
             </CartItemsContainer>
             <CartTotalContainer>
                 <CartTotalContainerText>
@@ -223,10 +106,10 @@ const Cart = () => {
                         <FontText  color="#707070" size={20} font="Light">TOTAL: </FontText>
                     </CartTotalContainerTextLast>
                 </CartTotalContainerText>
-                <FontText Weight="bold" color="#707070" size={20}>R$ 20,00</FontText>
+                <FontText Weight="bold" color="#707070" size={20}>R$ {states.Game.Cart.length > 0 ? genTotal(states.Game.Cart) : '0.00'}</FontText>
             </CartTotalContainer>
-            <CartButtonContainer>
-                <SimpleButton Arrow Color="#B5C401" ArrowSize={[50,36]}>
+            <CartButtonContainer onPress={SaveCart}>
+                <SimpleButton Arrow Color="#B5C401" ArrowSize={[50,36]} PressAction={SaveCart}>
                     <FontText color="#B5C401" size={32} italic Weight="bold">
                         Save
                     </FontText>
@@ -238,3 +121,4 @@ const Cart = () => {
 }
 
 export default Cart;
+

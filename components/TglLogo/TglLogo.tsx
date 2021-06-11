@@ -1,5 +1,4 @@
 import React from 'react';
-import { View,Text } from 'react-native';
 import FontText from '../FontText/FontText';
 import { FinalLine, TglLogoContainer } from './style';
 import { useNavigation } from '@react-navigation/native';

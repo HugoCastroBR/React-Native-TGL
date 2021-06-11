@@ -1,7 +1,6 @@
 
-import { SetNextPage, SetLoading, SetGlobalError, AuthLogin, SetLoadingSuccess } from '../store/actions';
-import useTGL from './useStore';
-import store, { RootState } from '../store';
+import { SetNextPage, SetLoading, SetGlobalError, SetLoadingSuccess } from '../store/actions';
+import store from '../store';
 const dispatch = store.dispatch
 
 export default function useStartingLoad(redirect: string){

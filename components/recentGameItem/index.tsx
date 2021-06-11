@@ -5,10 +5,11 @@ import NumbersFormatter from '../../functions/NumbersFormater'
 import { SavedGame } from '../../types';
 
 
-const RecentGameItem = ({type,price,color,data,numbers,active}:SavedGame) => {
+const RecentGameItem = ({type,price,color,data,numbers}:SavedGame) => {
 
 
-    const ItemDate = new Date(data)
+    const ItemDate = new Date(data.slice(0,10))
+    console.log("cu: ",price)
     return (
         <RecentGameItemContainer>
             <PreBar color={color}>
@@ -21,7 +22,7 @@ const RecentGameItem = ({type,price,color,data,numbers,active}:SavedGame) => {
 
                 </FontText>
                 <FontText color="#868686" font="Medium">
-                    {ItemDate.toLocaleDateString("en-US")} - (R$ {String(price.toFixed(2)).replace(".",",")})
+                    {ItemDate.toLocaleDateString("en-US")} - (R$ {String(Number(price).toFixed(2)).replace(".",",")})
 
                 </FontText>
                 <FontText color={color} size={18} italic Weight="bold">

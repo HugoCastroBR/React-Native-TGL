@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Text, View } from 'react-native';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import Footer from '../Partials/Footer/Footer';
-import Header from '../Partials/Header/Header';
+import React, {  useEffect } from 'react';
+import {  View } from 'react-native';
 import { ActivityIndicator } from 'react-native'
 import { LoadingScreenContainer } from './style';
-import FontText from '../FontText/FontText';
-import { Ionicons } from '@expo/vector-icons';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import { SetGlobalError, SetLoadingSuccess } from '../../store/actions';
 import useTGL from '../../hooks/useStore';
 

@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useGlobalErrorLoad, useSuccessLoad } from "../../hooks/useLoad";
 import api from "../../services/api";
 import setStorage, { removeStorage } from "../../services/AsyncStorage";
-import { UpdateInfos } from "../../types/";
-import { AuthLogout, SetGlobalError, SetLoading, SetLoadingSuccess, SetUser, UsersResetRegisterSuccess } from "../actions";
+import { SavedGame, UpdateInfos } from "../../types/";
+import { AuthLogout,  SetLoading, SetLoadingSuccess, SetRecentGames, SetUser, UsersResetRegisterSuccess } from "../actions";
 import { AuthSetMessage, AuthLogin, UsersRegisterSuccess } from "./../actions";
 import { useErrorLoad } from './../../hooks/useLoad';
 import { getStorage } from './../../services/AsyncStorage';
+
 
 
 
@@ -17,40 +19,35 @@ export const tryAuth = (email: string, password: string) => {
 	};
 
 	return (dispatch: any) => {
-		console.log("LoginFetch")
+		dispatch(SetRecentGames([]))
 		api.post("/auth", body)
 			.then((res) => {
+				removeStorage('token').then(
+					() => {
+						setStorage('token',res.data.token).then(() => {
+						
+							dispatch(SetRecentGames([] as SavedGame[]))
+							dispatch(AuthLogin(true));
+							useSuccessLoad()
+						
+						})
+					}
 				
-				dispatch(AuthSetMessage("Success", "green"));
-				console.log(res.data.token);
-				// dispatch(SetToken(res.data.token));
-				setStorage('token',res.data.token)
-				dispatch(AuthLogin(true));
-
-				// dispatch(SetLoadingSuccess(true))
-				// dispatch(SetLoading(false))
-				useSuccessLoad()
+				)
+				
 
 
 			})
 			.catch((err) => {
-				console.log(err);
-				console.log("erro");
 				dispatch(AuthLogin(false));
 				
 
 				if (err?.response?.status === 401) {
-					// dispatch(SetLoading(false))
 					useErrorLoad()
 					dispatch(AuthSetMessage("Invalid User", "red"));
 				} else {
-					console.log("aqui")
-					// dispatch(SetLoading(false))
-					// dispatch(SetGlobalError(true))
-					// dispatch(AuthSetMessage("Error", "red"));
 					useGlobalErrorLoad()
 				}
-				console.log("deu erro dms")
 				
 			});
 	};
@@ -72,37 +69,30 @@ export const tryRegister = (
 
 	return (dispatch: any) => {
 		api.post("/register", body)
-			.then((res) => {
-				dispatch(AuthSetMessage("Success", "green"));
+			.then(() => {
+				
 				dispatch(UsersRegisterSuccess());
-
-
-				// dispatch(SetLoadingSuccess(true))
-				// dispatch(SetLoading(false))
 				useSuccessLoad()
-				console.log("Deu Register")
-				// dispatch(AuthLogin(true));
+
 			})
 			.catch((err) => {
 				dispatch(AuthLogin(false));
 				dispatch(AuthLogin(false));
 				
 				if (err?.response?.status === 401) {
-					// dispatch(SetLoading(false))
+
 					useErrorLoad()
 					dispatch(AuthSetMessage("Invalid User!", "red"));
 				} else if (err?.response?.status === 400) {
-					console.log(err)
-					dispatch(SetLoading(false))
+
 					dispatch(
 						AuthSetMessage(
-							`${err.response.data[0].message == undefined ? 'Invalid' : err.response.data[0].message}`,
+							`${err.response.data[0].message == undefined ? err.response.data : err.response.data[0].message}`,
 							"red",
 						),
 					);
 				} else {
-					// dispatch(SetLoading(false))
-					// dispatch(SetGlobalError(true))
+
 					useGlobalErrorLoad()
 					dispatch(AuthSetMessage("Error", "red"));
 				}
@@ -118,7 +108,7 @@ export const tryResetPassword = (email: string) => {
 
 	return (dispatch: any) => {
 		api.post("/reset-password", body)
-			.then((res) => {
+			.then(() => {
 
 				dispatch(
 					AuthSetMessage(
@@ -168,8 +158,7 @@ export const tryUpdatePassword = (
 
 	return (dispatch: any) => {
 		api.put("/reset-password", body)
-			.then((res) => {
-				dispatch(AuthSetMessage("Success", "green"));
+			.then(() => {
 				dispatch(UsersRegisterSuccess());
 			})
 			.catch((err) => {
@@ -188,11 +177,11 @@ export const getUserInfos = () => {
 
 	const token = getStorage("token");
 	if (typeof token === "string") {
+	
 		api.defaults.headers.Authorization = `Bearer ${token}`;
 		return (dispatch: any) => {
 			api.get("/user")
-				.then((res) => {
-					dispatch(AuthSetMessage("Success", "green"));
+				.then(() => {
 					dispatch(UsersRegisterSuccess());
 				})
 				.catch((err) => {
@@ -215,7 +204,7 @@ export const getUserInfos = () => {
 export const UpdateProfile = (Infos: UpdateInfos) => {
 	// eslint-disable-next-line prefer-const
 	let Body: any = { ...Infos };
-	console.log("salvo")
+	
 	Object.entries(Infos).forEach((e) => {
 		if (!e[1] || e[1]?.length < 2) {
 			delete Body[e[0]];
@@ -229,13 +218,13 @@ export const UpdateProfile = (Infos: UpdateInfos) => {
 
 			api.defaults.headers.Authorization = `Bearer ${token}`;
 			api.put("/update-user", Body)
-			.then((res) => {
+			.then(() => {
 				dispatch(AuthSetMessage("Success", "green"));
 				dispatch(UsersRegisterSuccess());
 				useSuccessLoad()
 			})
 			.catch((err) => {
-				// console.log("erro:",err.response.data[0].message)
+				// 
 				useErrorLoad()
 				dispatch(
 					AuthSetMessage(
@@ -245,8 +234,8 @@ export const UpdateProfile = (Infos: UpdateInfos) => {
 				);
 			});
 		})
-		.catch((err) => {
-			console.log("erro2:",err)
+		.catch(() => {
+			
 			useGlobalErrorLoad()
 		})
 		
@@ -264,11 +253,11 @@ export const FetchUser = () => {
 					api.get("/user")
 						.then((res) => {
 							dispatch(SetUser({ ...res.data[0] }))
-							console.log("name:", res.data[0])
+							
 							useSuccessLoad()
 						})
-						.catch((err) => {
-							console.log(err)
+						.catch(() => {
+							
 							useGlobalErrorLoad()
 						});
 				}
@@ -280,9 +269,13 @@ export const FetchUser = () => {
 
 export const FetchLogout = () => {
 	return (dispatch: any) => {
-		dispatch(SetLoadingSuccess(false))
-		dispatch(SetLoading(false))
-		dispatch(AuthLogout)
+		removeStorage("token").then(() => {
+			
+			dispatch(SetLoadingSuccess(false))
+			dispatch(SetLoading(false))
+			dispatch(AuthLogout)
+		})
+		
 	}
 	
 }

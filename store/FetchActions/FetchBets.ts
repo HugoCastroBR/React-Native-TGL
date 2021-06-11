@@ -1,17 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import api from "../../services/api";
 import { SavedGame } from "../../types";
 import { SetRecentGames } from "../actions";
 import { getStorage } from "./../../services/AsyncStorage";
+import useStartingLoad, { useSuccessLoad } from './../../hooks/useLoad';
 
 export const getUserBets = () => {
 	// Get the user bets of the API
 
 	return (dispatch: any) => {
+		useStartingLoad('Home')
 		getStorage("token").then((token) => {
 			api.defaults.headers.Authorization = `Bearer ${token}`;
 			const config = {
 				headers: { Authorization: `Bearer ${token}` },
 			};
+			
 			api.get("/user-bets/0/1", config)
 				.then((res) => {
 					let NewData = res.data.map((e: any) => {
@@ -40,10 +44,13 @@ export const getUserBets = () => {
 					});
 
 					const FinalData: SavedGame[] = [...NewData];
+					
+					
 					dispatch(SetRecentGames(FinalData));
+					useSuccessLoad()
 				})
 				// eslint-disable-next-line @typescript-eslint/no-empty-function
-				.catch((err) => {});
+				.catch(() => {});
 		});
 	};
 };
@@ -64,12 +71,14 @@ export const addToUserBets = (Bets: SaveBets[]) => {
 		bets: BetsToSave,
 	};
 
-	const token = localStorage.getItem("token");
-	api.defaults.headers.Authorization = `Bearer ${token}`;
-	api.post("/bets", body)
+	getStorage("token").then((token) => {
+		api.defaults.headers.Authorization = `Bearer ${token}`;
+		api.post("/bets", body)
 		.then((res) => {
 			return res.data;
 		})
 		// eslint-disable-next-line @typescript-eslint/no-empty-function
-		.catch((err) => {});
+		.catch(() => {});
+	}) 
+	
 };

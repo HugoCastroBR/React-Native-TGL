@@ -48,7 +48,8 @@ export const ResetFilters = () => {  // Action to reset filters
     return GameActions.RESET_FILTERS()
 }
 
-export const SetRecentGames = (RecentGames:SavedGame[]) => {  // Set Recent Games in Game Slice
+export const SetRecentGames = (RecentGames:SavedGame[]) => { 
+    console.log(RecentGames) // Set Recent Games in Game Slice
     return GameActions.SET_RECENT_GAMES(RecentGames)
 }
 
@@ -57,15 +58,21 @@ export const SetCurrentGame = (CurrentGame:SavedGame) => {  // Set the current g
 }
 
 export const AddItemToCart = () => {  // Add a game to Cart
+    
     return GameActions.ADD_ITEM_TO_CART()
+    
 }
 
 export const DeleteCartItem = (index:number) => {  // Delete a game from cart
     return GameActions.DELETE_ITEM_INTO_CART(index)
 }
 
-export const SetCartErrorMsg = (msg:string,color:string) =>{  // Set a error/success in Cart container
-    return GameActions.SET_CART_MSG({msg,color})
+export const SetCartErrorMsg = (msg:string,color?:string) =>{
+  // Set a error/success in Cart container
+
+    return  color? GameActions.SET_CART_MSG({msg,color}) : GameActions.SET_CART_MSG({msg,color:'red'})
+    
+
 }
 
 export const ResetCart = () => {  // Clean the Cart
@@ -90,4 +97,8 @@ export const SetLoadingSuccess = (value:boolean) => {
 
 export const SetNextPage = (S:string) => {
     return AppActions.SET_NEXT_PAGE(S)
+}
+
+export const SetModalVisibility = (B:boolean) => {
+    return AppActions.TOGGLE_MODAL(B)
 }

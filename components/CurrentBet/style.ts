@@ -63,8 +63,8 @@ export const CurrentNumbersContainer = styled.View`
 
 `
 
-export const CurrentNumber = styled.View`
-    background-color: red;
+export const CurrentNumber = styled.View<{color:string}>`
+    background-color: ${(props) => props.color};
     width: 40px;
     height: 40px;
     border-radius: 100px;

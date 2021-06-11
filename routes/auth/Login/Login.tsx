@@ -1,21 +1,18 @@
-import { Link, useFocusEffect, useNavigation } from '@react-navigation/native';
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { Button, TextInput } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { TouchableOpacity, View } from 'react-native';
 import SimpleButton from '../../../components/arrowButton/arrowButton';
 import AuthFormTemplate from '../../../components/authFormTemplate';
-
-import { ButtonSendStyle, ForgetPasswordContainer, InputContainer, InputItem, InputStyle } from '../../../components/authFormTemplate/style';
+import { ButtonSendStyle, ForgetPasswordContainer, InputContainer } from '../../../components/authFormTemplate/style';
 import AuthInput from '../../../components/AuthInput/AuthInput';
 import FontText from '../../../components/FontText/FontText';
 import Page from '../../../components/Page';
 import TglLogo from '../../../components/TglLogo/TglLogo';
-import { AuthInputType } from '../../../types';
 import { AuthContainer, ErrorContainer, FormContainer, LogoContainer, TitleContainer } from './style';
 import Footer from './../../../components/Partials/Footer/Footer';
 import SplashImage from '../../../components/Splash/Splash';
 import useTGL from './../../../hooks/useStore';
-import { AuthSetMessage, SetLoading, SetGlobalError, SetNextPage } from './../../../store/actions';
+import { AuthSetMessage, SetLoading } from './../../../store/actions';
 import { useCallback } from 'react';
 import { tryAuth } from '../../../store/FetchActions/FetchAuth';
 import LoadingScreen from '../../../components/Loading';
@@ -46,8 +43,9 @@ const Login = () => {
 
     useEffect(() => {
         
+        // eslint-disable-next-line no-empty
         if(email == '' && password == ''){
-            console.log("empty")
+            
         }else{
             ValidAllInputs()
         }
@@ -75,7 +73,7 @@ const Login = () => {
                 
                 dispatch(tryAuth(email,password))
                 setMessage("Tentando entrar...","green")
-                console.log("foooi")
+                
                 
             }
         }
@@ -142,7 +140,7 @@ const Login = () => {
                     </LogoContainer>
                     <FontText italic Weight="bold" size={36} color="#707070">Authentication</FontText>
                 </TitleContainer>
-                <AuthFormTemplate name="LoginForm" >
+                <AuthFormTemplate  >
                     <InputContainer>
 
                         <AuthInput label="Email" type="email" actionChange={setEmail}/>
