@@ -1,16 +1,14 @@
-import { Link, useNavigation } from '@react-navigation/native';
-import React, { useRef, useState } from 'react';
-import { Text, View } from 'react-native';
-import { Button, TextInput } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { View } from 'react-native';
 import SimpleButton from '../../../components/arrowButton/arrowButton';
 import AuthFormTemplate from '../../../components/authFormTemplate';
 
-import { ButtonSendStyle, ForgetPasswordContainer, InputContainer, InputItem, InputStyle } from '../../../components/authFormTemplate/style';
+import { ButtonSendStyle, InputContainer } from '../../../components/authFormTemplate/style';
 import AuthInput from '../../../components/AuthInput/AuthInput';
-import FontText from '../../../components/FontText/FontText';
-import Page from '../../../components/Page';
-import TglLogo from '../../../components/TglLogo/TglLogo';
-import { AuthInputType } from '../../../types';
+import FontText from '../../../components/UI/FontText/FontText';
+import Page from '../../../components/UI/Page';
+import TglLogo from '../../../components/UI/TglLogo/TglLogo';
 import { AuthContainer, FormContainer, TitleContainer, LogoContainer, ErrorContainer } from '../Login/style';
 import Footer from './../../../components/Partials/Footer/Footer';
 

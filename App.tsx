@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import FontText from './components/FontText/FontText';
+import FontText from './components/UI/FontText/FontText';
 import { Provider as PaperProvider } from 'react-native-paper';
 import TabManager from './routes/navigation/AppTab';
 import StackManager from './routes/navigation/Stack';

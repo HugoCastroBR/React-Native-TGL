@@ -7,9 +7,9 @@ import AuthFormTemplate from '../../../components/authFormTemplate';
 
 import { ButtonSendStyle, ForgetPasswordContainer, InputContainer, InputItem, InputStyle } from '../../../components/authFormTemplate/style';
 import AuthInput from '../../../components/AuthInput/AuthInput';
-import FontText from '../../../components/FontText/FontText';
-import Page from '../../../components/Page';
-import TglLogo from '../../../components/TglLogo/TglLogo';
+import FontText from '../../../components/UI/FontText/FontText';
+import Page from '../../../components/UI/Page';
+import TglLogo from '../../../components/UI/TglLogo/TglLogo';
 import { AuthInputType } from '../../../types';
 import { AuthContainer, FormContainer, TitleContainer, LogoContainer, ErrorContainer } from '../Login/style';
 import Footer from './../../../components/Partials/Footer/Footer';
@@ -38,7 +38,7 @@ const ResetPassword = () => {
                     <FontText italic Weight="bold" size={36} color="#707070">Reset Password</FontText>
                     
                 </TitleContainer>
-                <AuthFormTemplate name="ResetPasswordForm" >
+                <AuthFormTemplate  >
                     <InputContainer>
 
 

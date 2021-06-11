@@ -1,6 +1,6 @@
 import React from 'react';
-import ArrowLeft from '../icons/arrowLeft';
-import ArrowRight from '../icons/arrowRight';
+import ArrowLeft from '../UI/icons/arrowLeft';
+import ArrowRight from '../UI/icons/arrowRight';
 
 import { ButtonStyle } from './style';
 

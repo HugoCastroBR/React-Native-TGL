@@ -80,25 +80,30 @@ export const ResetCart = () => {  // Clean the Cart
 }
 
 
+
 // -- App Actions -- //
 
+// Set if is Loading
 export const SetLoading = (value: boolean) => {
     return AppActions.SET_LOADING(value)
 }
 
+//  Set if is a Server error
 export const SetGlobalError = (value: boolean) => {
     return AppActions.SET_GLOBAL_ERROR(value)
 }
 
+//  Set if is a Success Loading
 export const SetLoadingSuccess = (value:boolean) => {
     return AppActions.SET_LOADING_SUCCESS(value)
 }
 
-
+// Set the Next Page
 export const SetNextPage = (S:string) => {
     return AppActions.SET_NEXT_PAGE(S)
 }
 
+// Set the modal visibility
 export const SetModalVisibility = (B:boolean) => {
     return AppActions.TOGGLE_MODAL(B)
 }

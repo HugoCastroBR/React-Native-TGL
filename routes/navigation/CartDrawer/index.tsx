@@ -2,8 +2,8 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import NewBet from '../../app/NewBet/NewBet/NewBet';
-import FontText from './../../../components/FontText/FontText';
-import Cart from '../../../containers/Cart/Cart';
+import FontText from '../../../components/UI/FontText/FontText';
+import Cart from '../../../containers/NewBet/Cart/Cart';
 
 
 const Drawer = createDrawerNavigator();

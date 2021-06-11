@@ -1,15 +1,15 @@
 import React, {  useLayoutEffect } from 'react';
-import {  TouchableOpacity  } from 'react-native';
-import FontText from '../../../components/FontText/FontText';
-import Page from '../../../components/Page';
+import {  TouchableOpacity, View  } from 'react-native';
+import FontText from '../../../components/UI/FontText/FontText';
+import Page from '../../../components/UI/Page';
 import RecentGameItem from '../../../components/recentGameItem';
 import { HomeContainer, RecentGamesTitle, RecentGamesContainer,  FiltersContainer, FilterTitleContainer } from './style';
-import FilterSelect from '../../../containers/filterSelect';
+import FilterSelect from '../../../containers/home/filterSelect';
 import { FetchUser } from '../../../store/FetchActions/FetchAuth';
 import useTGL from './../../../hooks/useStore';
 import useStartingLoad from './../../../hooks/useLoad';
-import LoadingScreen from '../../../components/Loading';
-import RetryLoading from '../../../components/Retry Load';
+import LoadingScreen from '../../../containers/Others/Loading';
+import RetryLoading from '../../../containers/Others/Retry Load';
 import { Ionicons } from '@expo/vector-icons';
 import { getUserBets } from '../../../store/FetchActions/FetchBets';
 import { ResetFilters } from '../../../store/actions';
@@ -41,10 +41,6 @@ const Home = () => {
     },[])
 
     
-
-
-
-
 
     const GenItems = () => {
         let toReturn;
@@ -79,7 +75,9 @@ const Home = () => {
                     <FiltersContainer>
                         <FontText size={30} italic Weight="bold" color="#707070">Recent Games</FontText>
                         <FilterTitleContainer>
-                            <FontText size={20} italic  color="#707070">Filters: </FontText>
+                            {
+                                states.Game.RecentGames.length > 0 && <FontText size={20} italic  color="#707070">Filters: </FontText>
+                            }
                         </FilterTitleContainer>
                         <FilterSelect />
                     </FiltersContainer>
@@ -91,7 +89,10 @@ const Home = () => {
                     {/* For Recent Games make a Recent Game Item in page */}
                 
 
-                    {states.Game.RecentGames.length > 0 ? GenItems() : <FontText>No Recent Games</FontText>}
+                    {states.Game.RecentGames.length > 0 ? GenItems() : 
+                    <View style={{marginLeft:12}}>
+                        <FontText italic Weight="bold" size={22} color="#555">No Recent Games</FontText>
+                    </View>}
                     
 
                 </RecentGamesContainer>

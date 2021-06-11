@@ -51,7 +51,7 @@ export const GameSlice = createSlice({
 				state.RecentGames = state.RecentGames.map(element => {
 				const NewElement:any = {...element}
 				NewElement.active = false
-				console.log("que isso aqui a")
+				
 				return NewElement
 			})
 			}else{

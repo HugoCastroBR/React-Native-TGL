@@ -1,13 +1,13 @@
 import React from 'react';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import CurrentBet from '../../../../components/CurrentBet/CurrentBet';
+import CurrentBet from '../../../../containers/CurrentBet/CurrentBet';
 import { ScrollView } from 'react-native-gesture-handler';
 import Header from '../../../../components/Partials/Header/Header';
 import {  NumbersContainer } from './style';
-import BetNumberBtn from '../../../../components/BetNumberBtn/BetNumberBtn';
+import BetNumberBtn from '../../../../containers/NewBet/BetNumberBtn/BetNumberBtn';
 import useTGL from '../../../../hooks/useStore';
-import Modal from '../../../../components/Modal/Modal';
+import Modal from '../../../../containers/Others/Modal/Modal';
 
 
 

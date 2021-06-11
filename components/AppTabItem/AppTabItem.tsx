@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FontText from '../FontText/FontText';
+import FontText from '../UI/FontText/FontText';
 import { AppTabItemContainer, DefaultIconContainer, TopBarSelected } from './style';
 
 

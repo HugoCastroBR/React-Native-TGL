@@ -2,9 +2,9 @@ import React from 'react';
 import { useState, useLayoutEffect } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import FontText from '../../../components/FontText/FontText';
+import FontText from '../../../components/UI/FontText/FontText';
 import useTGL from '../../../hooks/useStore';
-import Page from './../../../components/Page/index';
+import Page from '../../../components/UI/Page/index';
 import { UpdateProfile } from './../../../store/FetchActions/FetchAuth';
 import { SaveAccountInfosContainer } from './style';
 import useStartingLoad from './../../../hooks/useLoad';
@@ -17,16 +17,7 @@ import { AuthSetMessage } from './../../../store/actions';
 const Account = () => {
 
 
-
-
-
     const { states, dispatch } = useTGL()
-
-
-
-
-
-
 
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -34,10 +25,8 @@ const Account = () => {
 
     useLayoutEffect(() => {
 
-        dispatch(AuthSetMessage("","green"))
+        dispatch(AuthSetMessage("", "green"))
     }, [])
-
-
 
 
     const FunctionSaveAccountDetails = () => {
@@ -51,7 +40,7 @@ const Account = () => {
             phone_number: phone,
             username
         }
-        console.log(infos)
+
         dispatch(UpdateProfile(infos))
     }
 
@@ -65,6 +54,7 @@ const Account = () => {
     const [about, setAbout] = useState(states.Auth.User.about !== null ? states.Auth.User.about : '')
 
 
+    const [hiddenState, setHiddenState] = useState(true)
 
     return (
         <Page header>
@@ -111,7 +101,7 @@ const Account = () => {
                         style={{ width: 320, height: 70, backgroundColor: 'white' }}
                         onChangeText={(text) => {
                             setPhone(text)
-                            console.log(phone)
+
                         }}
                         value={phone}
                         placeholder="Phone Number"
@@ -125,6 +115,8 @@ const Account = () => {
                         }}
                         value={password}
                         placeholder="Password"
+                        secureTextEntry={hiddenState}
+                        right={<TextInput.Icon onPress={() => setHiddenState(!hiddenState)} name="eye" />}
                     />
 
                     <TextInput
@@ -133,6 +125,7 @@ const Account = () => {
                             setPasswordConfirmation(text)
                         }}
                         value={passwordConfirmation}
+                        secureTextEntry={true}
                         placeholder="Password Confirmation"
                     />
 
@@ -141,7 +134,7 @@ const Account = () => {
 
                     <SaveAccountInfosContainer onPress={() => {
                         FunctionSaveAccountDetails()
-                        // console.log(username)
+                        // 
                     }}>
                         <FontText Weight="bold" size={30} color="#717171">
                             Save

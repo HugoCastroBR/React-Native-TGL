@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { Text, View } from 'react-native';
-import FontText from '../../../components/FontText/FontText';
+import FontText from '../../../components/UI/FontText/FontText';
 import Home from '../../app/Home/Home';
 import NewBetManager from '../../app/NewBet/';
 import ForgotPassword from '../../auth/ForgotPassword/ForgotPassword';

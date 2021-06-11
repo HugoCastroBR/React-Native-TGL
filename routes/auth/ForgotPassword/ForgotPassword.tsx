@@ -5,10 +5,10 @@ import SimpleButton from '../../../components/arrowButton/arrowButton';
 import AuthFormTemplate from '../../../components/authFormTemplate';
 import { ButtonSendStyle,  InputContainer,  } from '../../../components/authFormTemplate/style';
 import AuthInput from '../../../components/AuthInput/AuthInput';
-import FontText from '../../../components/FontText/FontText';
-import Page from '../../../components/Page';
-import RetryLoading from '../../../components/Retry Load';
-import TglLogo from '../../../components/TglLogo/TglLogo';
+import FontText from '../../../components/UI/FontText/FontText';
+import Page from '../../../components/UI/Page';
+import RetryLoading from '../../../containers/Others/Retry Load';
+import TglLogo from '../../../components/UI/TglLogo/TglLogo';
 import { useSuccessLoad } from '../../../hooks/useLoad';
 import useTGL from '../../../hooks/useStore';
 import { AuthSetMessage, SetLoading } from '../../../store/actions';
@@ -18,7 +18,7 @@ import useStartingLoad from './../../../hooks/useLoad';
 import { Ionicons } from '@expo/vector-icons';
 import { tryResetPassword } from './../../../store/FetchActions/FetchAuth';
 import { useEffect } from 'react';
-import LoadingScreen from '../../../components/Loading';
+import LoadingScreen from '../../../containers/Others/Loading';
 
 
 

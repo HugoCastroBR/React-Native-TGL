@@ -3,15 +3,15 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { Text, View } from 'react-native';
-import FontText from '../../../components/FontText/FontText';
+import FontText from '../../../components/UI/FontText/FontText';
 import Home from '../../app/Home/Home';
 import NewBetManager from '../../app/NewBet';
 import Account from '../../app/Account/Account';
 import { color } from 'react-native-reanimated';
 import AppTabItem from '../../../components/AppTabItem/AppTabItem';
-import Accounticon from './../../../components/icons/AccountIcon';
-import HomeIcon from '../../../components/icons/HomeIcon';
-import NewBetIcon from './../../../components/icons/newBetIcon';
+import Accounticon from '../../../components/UI/icons/AccountIcon';
+import HomeIcon from '../../../components/UI/icons/HomeIcon';
+import NewBetIcon from '../../../components/UI/icons/newBetIcon';
 
 
 const Tab = createBottomTabNavigator();

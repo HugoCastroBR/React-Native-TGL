@@ -1,6 +1,6 @@
 import React from 'react';
 import { RecentGameItemContainer, PreBar, RecentGameItemStyle } from './style';
-import FontText from './../FontText/FontText';
+import FontText from '../UI/FontText/FontText';
 import NumbersFormatter from '../../functions/NumbersFormater'
 import { SavedGame } from '../../types';
 
@@ -9,7 +9,7 @@ const RecentGameItem = ({type,price,color,data,numbers}:SavedGame) => {
 
 
     const ItemDate = new Date(data.slice(0,10))
-    console.log("cu: ",price)
+
     return (
         <RecentGameItemContainer>
             <PreBar color={color}>

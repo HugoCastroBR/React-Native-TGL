@@ -1,9 +1,9 @@
 import React from 'react';
-import LogoutIcon from '../../icons/logout';
-import TglLogo from '../../TglLogo/TglLogo';
+import LogoutIcon from '../../UI/icons/logout';
+import TglLogo from '../../UI/TglLogo/TglLogo';
 import { HeaderContainer, MainButtonsContainer } from './style';
 
-import CartIcon from './../../icons/cartIcon';
+import CartIcon from '../../UI/icons/cartIcon';
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
