@@ -12,7 +12,7 @@ import { SetNextPage } from '../../../store/actions';
 const HomeIcon = ({color="#C1C1C1"}:{color?:string}) => {
 
     const navigation = useNavigation()
-    const {states,dispatch} = useTGL()
+    const {dispatch} = useTGL()
 
     const size = 34
     return (

@@ -16,7 +16,7 @@ export const getUserBets = () => {
 				headers: { Authorization: `Bearer ${token}` },
 			};
 			
-			api.get("/user-bets/0/1", config)
+			api.get("/user-bets/0	", config)
 				.then((res) => {
 					let NewData = res.data.map((e: any) => {
 						if (typeof e.numbers === "string") {

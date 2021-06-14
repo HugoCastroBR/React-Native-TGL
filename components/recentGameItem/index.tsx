@@ -8,8 +8,8 @@ import { SavedGame } from '../../types';
 const RecentGameItem = ({type,price,color,data,numbers}:SavedGame) => {
 
 
-    const ItemDate = new Date(data.slice(0,10))
-
+    const ItemDate = new Date(`${data.slice(0,10)}T04:00`) 
+    //  ADD + 04H
     return (
         <RecentGameItemContainer>
             <PreBar color={color}>
@@ -22,7 +22,7 @@ const RecentGameItem = ({type,price,color,data,numbers}:SavedGame) => {
 
                 </FontText>
                 <FontText color="#868686" font="Medium">
-                    {ItemDate.toLocaleDateString("en-US")} - (R$ {String(Number(price).toFixed(2)).replace(".",",")})
+                    {ItemDate.toLocaleDateString('en-US', {timeZone: 'UTC'})} - (R$ {String(Number(price).toFixed(2)).replace(".",",")})
 
                 </FontText>
                 <FontText color={color} size={18} italic Weight="bold">

@@ -8,18 +8,10 @@ import {  NumbersContainer } from './style';
 import BetNumberBtn from '../../../../containers/NewBet/BetNumberBtn/BetNumberBtn';
 import useTGL from '../../../../hooks/useStore';
 import Modal from '../../../../containers/Others/Modal/Modal';
+import inRange from '../../../../functions/inRange';
 
 
 
-
-const inRange = (N: number) => {
-    // eslint-disable-next-line prefer-const
-    let Arr = []
-    while (Arr.length < N) {
-        Arr.push(Arr.length ? Arr.length + 1 : 1)
-    }
-    return Arr
-}
 
 
 
@@ -28,7 +20,7 @@ const NewBet = () => {
 
     const navigation = useNavigation()
 
-    
+    // The current Game details
     const currentGame = states.Game.GamesData.find(e => e.active)
 
     return (

@@ -73,3 +73,10 @@ export type UserRes = {
     phone_number: string
     about: string
 }
+
+export type inputProps = {
+    onChangeText: React.Dispatch<React.SetStateAction<string>>;
+    value: string 
+    placeholder: string
+    hidden: boolean;
+}

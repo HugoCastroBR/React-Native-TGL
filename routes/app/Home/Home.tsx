@@ -13,8 +13,7 @@ import RetryLoading from '../../../containers/Others/Retry Load';
 import { Ionicons } from '@expo/vector-icons';
 import { getUserBets } from '../../../store/FetchActions/FetchBets';
 import { ResetFilters } from '../../../store/actions';
-import { SetRecentGames } from './../../../store/actions';
-import { useEffect } from 'react';
+
 
 
 
@@ -23,31 +22,30 @@ const Home = () => {
     const {states,dispatch} = useTGL()
 
     const Load = () => {
-        
         useStartingLoad('Home')
         dispatch(FetchUser())
         dispatch(getUserBets())
-        
     }
 
     useLayoutEffect(() => {
         dispatch(ResetFilters())
-        dispatch(SetRecentGames([]))
         Load()
     },[])
 
-    useEffect(() => {
-        dispatch(SetRecentGames([]))
-    },[])
+    // useEffect(() => {
+    //     dispatch(SetRecentGames([]))
+    // },[])
 
-    
 
+    // Gen Recent Games Item
     const GenItems = () => {
         let toReturn;
         
+        //  if is not Recent Games active return all
         if(!states.Game.RecentGames.find(e => e.active === true)){
             toReturn = states.Game.RecentGames.map((element,index) => <RecentGameItem {...element} key={index}></RecentGameItem>)
         }else{
+            // If find a recent game active return just the games with active
             toReturn = states.Game.RecentGames
                 .filter(element => element.active)
                 .map((element,index) => <RecentGameItem {...element} key={index}></RecentGameItem>)

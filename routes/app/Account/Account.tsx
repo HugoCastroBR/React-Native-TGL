@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState, useLayoutEffect } from 'react';
+import React, { useCallback } from 'react';
+import { useState, useLayoutEffect, useEffect } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import FontText from '../../../components/UI/FontText/FontText';
@@ -8,29 +8,49 @@ import Page from '../../../components/UI/Page/index';
 import { UpdateProfile } from './../../../store/FetchActions/FetchAuth';
 import { SaveAccountInfosContainer } from './style';
 import useStartingLoad from './../../../hooks/useLoad';
-import { UpdateInfos } from '../../../types';
-import { TextInput } from 'react-native-paper';
+import { inputProps, UpdateInfos } from '../../../types';
 import { AuthSetMessage } from './../../../store/actions';
+import AccountInput from '../../../components/AccountInput/AccountInput';
+import { ValidPassword } from '../../../functions/Validators/Auth';
 
 
 
 const Account = () => {
 
-
     const { states, dispatch } = useTGL()
 
+    
+    const [username, setUsername] = useState(states.Auth.User.username)
+    const [email, setEmail] = useState(states.Auth.User.email)
+    const [password, setPassword] = useState('')
+    const [passwordConfirmation, setPasswordConfirmation] = useState('')
+    const [phone, setPhone] = useState(states.Auth.User.phone_number)
+    const [about, setAbout] = useState(states.Auth.User.about !== null ? states.Auth.User.about : '')
+
+
+    
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
+    const ValidAllInputs = () => {
+        if(password !== ""){
+            return ValidPassword(password,passwordConfirmation,setMessage)
+        }else{
+            return true
+        }
+    }
+
+    useEffect(() => {
+        ValidAllInputs()
+    },[password,passwordConfirmation])
 
     useLayoutEffect(() => {
-
         dispatch(AuthSetMessage("", "green"))
     }, [])
 
 
+    // Verify and Save New Account Details
     const FunctionSaveAccountDetails = () => {
-
         useStartingLoad('Account')
         const infos: UpdateInfos = {
             about,
@@ -40,21 +60,54 @@ const Account = () => {
             phone_number: phone,
             username
         }
-
-        dispatch(UpdateProfile(infos))
+        if(ValidAllInputs()){
+            dispatch(UpdateProfile(infos))
+            
+        }else{
+            setMessage("Invalid Inputs")
+        }
+        
     }
 
+    const setMessage = useCallback((message = '', messageColor = 'red') => {
+        dispatch(AuthSetMessage(message, messageColor))
+    }, [states.Auth.message])
 
+    //  Set Error Message
 
-    const [username, setUsername] = useState(states.Auth.User.username)
-    const [email, setEmail] = useState(states.Auth.User.email)
-    const [password, setPassword] = useState('')
-    const [passwordConfirmation, setPasswordConfirmation] = useState('')
-    const [phone, setPhone] = useState(states.Auth.User.phone_number)
-    const [about, setAbout] = useState(states.Auth.User.about !== null ? states.Auth.User.about : '')
-
-
-    const [hiddenState, setHiddenState] = useState(true)
+    const inputs: inputProps[] = [
+        {
+            onChangeText: setUsername,
+            placeholder: "Username",
+            value: username,
+            hidden: false
+        },{
+            onChangeText: setEmail,
+            placeholder: "Email",
+            value: email,
+            hidden: false
+        },{
+            onChangeText: setPhone,
+            placeholder: "Phone Number",
+            value: phone,
+            hidden: false
+        },{
+            onChangeText: setAbout,
+            placeholder: "About",
+            value: about,
+            hidden: false
+        },{
+            onChangeText: setPassword,
+            placeholder: "New Password",
+            value: password,
+            hidden: true
+        },{
+            onChangeText: setPasswordConfirmation,
+            placeholder: "Password Confirmation",
+            value: passwordConfirmation,
+            hidden: true
+        }
+    ]
 
     return (
         <Page header>
@@ -67,67 +120,11 @@ const Account = () => {
                     <FontText italic Weight="bold" color="#717171" size={36} >Account</FontText>
 
 
+                    {/*  Gen Inputs */}
+                    {inputs.map((element, index) => (
+                        <AccountInput {...element} key={index}/>
+                    ))}
 
-                    <TextInput
-                        style={{ width: 320, height: 70, backgroundColor: 'white' }}
-                        onChangeText={(text) => {
-                            setUsername(text)
-                        }}
-                        value={username}
-                        placeholder="Username"
-                    />
-
-                    <TextInput
-                        style={{ width: 320, height: 70, backgroundColor: 'white' }}
-                        onChangeText={(text) => {
-                            setEmail(text)
-                        }}
-                        value={email}
-                        placeholder="Email"
-                    />
-
-
-                    <TextInput
-                        style={{ width: 320, height: 70, backgroundColor: 'white' }}
-                        onChangeText={(text) => {
-                            setAbout(text)
-                        }}
-                        value={about}
-                        placeholder="About"
-                    />
-
-
-                    <TextInput
-                        style={{ width: 320, height: 70, backgroundColor: 'white' }}
-                        onChangeText={(text) => {
-                            setPhone(text)
-
-                        }}
-                        value={phone}
-                        placeholder="Phone Number"
-                    />
-
-
-                    <TextInput
-                        style={{ width: 320, height: 70, backgroundColor: 'white' }}
-                        onChangeText={(text) => {
-                            setPassword(text)
-                        }}
-                        value={password}
-                        placeholder="Password"
-                        secureTextEntry={hiddenState}
-                        right={<TextInput.Icon onPress={() => setHiddenState(!hiddenState)} name="eye" />}
-                    />
-
-                    <TextInput
-                        style={{ width: 320, height: 70, backgroundColor: 'white' }}
-                        onChangeText={(text) => {
-                            setPasswordConfirmation(text)
-                        }}
-                        value={passwordConfirmation}
-                        secureTextEntry={true}
-                        placeholder="Password Confirmation"
-                    />
 
                     {/* <AccountInput setState={setUsername} /> */}
                     <FontText color={states.Auth.messageColor} font="Light" size={14}>{states.Auth.message}</FontText>

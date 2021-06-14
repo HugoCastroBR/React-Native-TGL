@@ -19,6 +19,7 @@ import LoadingScreen from '../../../containers/Others/Loading';
 import RetryLoading from '../../../containers/Others/Retry Load';
 import { Ionicons } from '@expo/vector-icons';
 import useStartingLoad from './../../../hooks/useLoad';
+import { validEmail } from '../../../functions/Validators/Auth';
 
 
 
@@ -32,8 +33,6 @@ const Login = () => {
 
 
     const {states, dispatch} = useTGL() 
-
-    
 
 
     const setMessage = useCallback((message='',messageColor='red') => {
@@ -65,9 +64,7 @@ const Login = () => {
 
     const FunctionLogin = () => {
         if(ValidAllInputs()){
-                // dispatch(SetNextPage('App'))
-                // dispatch(SetLoading(true))
-                // dispatch(SetGlobalError(false))
+
 
                 useStartingLoad('App')
                 
@@ -85,21 +82,7 @@ const Login = () => {
             return true
         }
     }
-    const validEmail = (email: string) => {
-        if(email){
-            if(/^[^@]+@\w+(\.\w+)+\w$/.test(email)){
-                setMessage('')
-                return true
-            }else{
-                setMessage('Invalid Email')
-                return false
-            }
-            
-        }else{
-            setMessage('The Email field have to be filled')
-            return false
-        }
-    }
+
 
 
     const ValidPassword = (password: string) => {

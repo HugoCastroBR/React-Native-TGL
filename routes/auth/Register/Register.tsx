@@ -18,6 +18,7 @@ import Footer from './../../../components/Partials/Footer/Footer';
 import { Ionicons } from '@expo/vector-icons';
 import useStartingLoad from './../../../hooks/useLoad';
 import { useLayoutEffect } from 'react';
+import { ValidUsername, ValidPassword, validEmail } from '../../../functions/Validators/Auth';
 
 
 
@@ -30,36 +31,32 @@ const Register = () => {
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
+    
+    const { states, dispatch } = useTGL()
 
     useEffect(() => {
+        // Stop Loading and Set when Register go to App
         dispatch(AuthSetMessage('', 'green'))
         dispatch(SetLoading(false))
         dispatch(SetNextPage('App'))
     }, [])
 
-    useEffect(() => setMessage("a"), [])
 
-    const { states, dispatch } = useTGL()
+    useEffect(() => {
+        ValidAllInputs()
+        
+    }, [username, email, password, passwordConfirmation])
+
+    useLayoutEffect(() => {
+        dispatch(AuthSetMessage('', 'green'))
+    }, [])
 
 
     const setMessage = useCallback((message = '', messageColor = 'red') => {
         dispatch(AuthSetMessage(message, messageColor))
     }, [states.Auth.message])
 
-
-    useEffect(() => {
-        ValidAllInputs()
-
-    }, [username, email, password, passwordConfirmation])
-
-
-    useLayoutEffect(() => {
-        dispatch(AuthSetMessage('', 'green'))
-    }, [])
-
     const FunctionRegister = () => {
-
-
         if (ValidAllInputs()) {
             if (username && passwordConfirmation &&
                 password && email) {
@@ -69,80 +66,24 @@ const Register = () => {
                     password: password,
                     email: email
                 }
-
                 useStartingLoad('Login')
                 dispatch(tryRegister(username, email, password, passwordConfirmation))
-
                 setMessage('', "green")
-
-
             }
         }
     }
     const ValidAllInputs = () => {
-        if (ValidUsername(username) && ValidPassword(password, passwordConfirmation) && validEmail(email)) {
+        if (ValidUsername(username,setMessage) && 
+        ValidPassword(password, passwordConfirmation,setMessage) && 
+        validEmail(email,setMessage)) {
             setMessage('')
             return true
         }
-    }
-
-    const ValidUsername = (username: string) => {
-        if (username) {
-            if (username.length >= 2) {
-                setMessage('')
-                return username
-            } else {
-                setMessage('The username has to be up to 2 characters')
-                return false
-            }
-
-        } else {
-            setMessage('The username field have to be filled')
-            return false
+        if(username  == "" && email   == "" && password == "" && passwordConfirmation == "" ){
+            setMessage("")
         }
     }
 
-    const ValidPassword = (password: string, Cpassword: string) => {
-        if (password) {
-            if (password) {
-                if (Cpassword) {
-                    if (Cpassword === password) {
-                        setMessage('')
-                        return password
-                    } else {
-                        setMessage('The passwords are not equal')
-                    }
-
-                } else {
-                    setMessage('The password confirmation has to be filled')
-                }
-
-            } else {
-                setMessage('The password has to be up to 6 characters')
-                return false
-            }
-
-        } else {
-            setMessage('The password field have to be filled')
-            return false
-        }
-    }
-
-    const validEmail = (email: string) => {
-        if (email) {
-            if (/^[^@]+@\w+(\.\w+)+\w$/.test(email)) {
-                setMessage('')
-                return true
-            } else {
-                setMessage('Invalid Email')
-                return false
-            }
-
-        } else {
-            setMessage('The Email field have to be filled')
-            return false
-        }
-    }
 
 
     return (
